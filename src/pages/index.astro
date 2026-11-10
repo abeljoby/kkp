@@ -1,11 +1,120 @@
 ---
-import Welcome from '../components/Welcome.astro';
 import Layout from '../layouts/Layout.astro';
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+const companies = [
+	{ number: '01', name: 'Beam Electro-Mechanical', type: 'Engineering & contracting', initials: 'BE' },
+	{ number: '02', name: 'Beam Carpentry', type: 'Joinery & craftsmanship', initials: 'BC' },
+	{ number: '03', name: 'FIS Interior Decoration', type: 'Interior design & fit-out', initials: 'FIS' },
+	{ number: '04', name: 'Superfine Services', type: 'Facilities management', initials: 'SF' },
+	{ number: '05', name: 'Mint Business Center', type: 'Business workspace', initials: 'M' },
+	{ number: '06', name: 'Eminent Contracting', type: 'Construction', initials: 'EC' },
+];
+
+const values = [
+	{ n: '01', title: 'Built on trust', text: 'Long-standing relationships, grounded in reliability and respect.' },
+	{ n: '02', title: 'Made to deliver', text: 'Experienced teams who take ownership from first brief to final handover.' },
+	{ n: '03', title: 'Always improving', text: 'Practical thinking and better ways of working, shaped around each project.' },
+];
 ---
 
 <Layout>
-	<Welcome />
+	<div class="site-shell" data-design="modern">
+		<div class="utility-bar">
+			<div class="wrap utility-inner">
+				<span>Dubai, United Arab Emirates</span>
+				<div class="utility-links"><a href="tel:+97144226185">+971 4 422 6185</a><span class="utility-divider"></span><a href="mailto:beamco@beamcointl.com">Email the group <span aria-hidden="true">↗</span></a></div>
+			</div>
+		</div>
+		<header class="site-header wrap">
+			<a class="brand" href="#top" aria-label="KKP Group home"><span class="brand-mark">K<span>K</span>P</span><span class="brand-name">GROUP<span>UNITED ARAB EMIRATES</span></span></a>
+			<nav class="main-nav" aria-label="Main navigation">
+				<a href="#about">Our story</a><a href="#companies">Our companies</a><a href="#projects">Our work</a><a href="#contact">Contact</a>
+			</nav>
+			<a class="header-cta" href="#companies">Explore the group <span aria-hidden="true">↗</span></a>
+			<button class="menu-toggle" type="button" aria-label="Open navigation" aria-expanded="false"><span></span><span></span></button>
+		</header>
+
+		<main id="top">
+			<section class="hero">
+				<div class="hero-art" aria-hidden="true">
+					<div class="art-grid"></div><div class="art-orbit orbit-one"></div><div class="art-orbit orbit-two"></div>
+					<div class="art-building building-back"><i></i><i></i><i></i><i></i><i></i></div>
+					<div class="art-building building-front"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+					<div class="art-sun"></div><div class="art-base"></div>
+				</div>
+				<div class="wrap hero-content">
+					<p class="eyebrow"><span class="eyebrow-rule"></span> A UAE group with a hands-on spirit</p>
+					<h1>We build what<br />moves <em>business</em><span class="hero-period">.</span></h1>
+					<p class="hero-copy">From engineering and construction to the places where business happens, KKP Group brings people and expertise together to make progress real.</p>
+					<div class="hero-actions"><a class="button button-primary" href="#companies">Meet our companies <span aria-hidden="true">↗</span></a><a class="text-link" href="#about">Discover our story <span aria-hidden="true">↓</span></a></div>
+				</div>
+				<div class="wrap hero-foot"><span>01 / 03 <span class="foot-line"></span> GROUP OVERVIEW</span><span>Delivering excellence since 1980<sup>1</sup></span></div>
+			</section>
+
+			<section class="proof-strip" aria-label="Group highlights"><div class="wrap proof-inner"><span class="proof-label">One group.<br />Many capabilities.</span><div class="proof-item"><strong>1980</strong><span>Our story begins</span></div><div class="proof-item"><strong>06</strong><span>Distinct businesses</span></div><div class="proof-item"><strong>UAE</strong><span>Rooted in the Emirates</span></div><a class="proof-link" href="#about" aria-label="Learn about our group">↘</a></div></section>
+
+			<section class="section companies-section" id="companies">
+				<div class="wrap">
+					<div class="section-heading"><div><p class="eyebrow"><span class="eyebrow-rule"></span> A connected group</p><h2>Different strengths.<br /><em>Shared ambition.</em></h2></div><p class="section-intro">Six specialist businesses, each with its own expertise. Together, we bring a broad view and a practical approach to every opportunity.</p></div>
+					<div class="company-grid">
+						{companies.map((company) => <a class="company-card" href="#contact"><span class="company-top"><span class="company-number">{company.number}</span><span class="company-arrow" aria-hidden="true">↗</span></span><span class="company-monogram">{company.initials}</span><span class="company-name">{company.name}</span><span class="company-type">{company.type}</span></a>)}
+					</div>
+					<p class="content-note"><sup>1</sup> Company history and group information adapted from the current Beamco website. KKP Group branding and company portfolio are shown here as a prototype and should be confirmed.</p>
+				</div>
+			</section>
+
+			<section class="story-section" id="about">
+				<div class="wrap story-layout"><div class="story-label"><span class="eyebrow"><span class="eyebrow-rule"></span> The KKP story</span><span class="story-index">EST.<br /><b>1980</b></span></div><div class="story-main"><h2>Four decades of<br /><em>getting it done.</em></h2><div class="story-copy"><p>Our journey began in 1980 in the construction and maintenance industry. What started as a hands-on engineering venture has grown into a group of businesses serving clients across the UAE.</p><p>Today, we bring together decades of experience, specialist teams and a shared commitment to doing work we can stand behind.</p><a class="text-link" href="#contact">A note from our chairman <span aria-hidden="true">↗</span></a></div></div><div class="story-image" aria-label="Illustration of a UAE city and building landscape"><div class="sky-disc"></div><div class="city-shape city-one"></div><div class="city-shape city-two"></div><div class="city-shape city-three"></div><div class="city-lines"></div><span>BUILT OVER TIME<br />BUILT TO LAST</span></div></div>
+			</section>
+
+			<section class="values-section"><div class="wrap values-layout"><div class="values-title"><p class="eyebrow"><span class="eyebrow-rule"></span> What guides us</p><h2>Good work starts<br />with <em>good people.</em></h2><p>We believe lasting results come from thoughtful collaboration, care and accountability.</p></div><div class="values-list">{values.map((value) => <article class="value-row"><span>{value.n}</span><div><h3>{value.title}</h3><p>{value.text}</p></div><span class="value-arrow" aria-hidden="true">↗</span></article>)}</div></div></section>
+
+			<section class="project-section" id="projects"><div class="project-graphic" aria-hidden="true"><div class="project-ring ring-a"></div><div class="project-ring ring-b"></div><div class="project-block"></div><div class="project-dot"></div></div><div class="wrap project-content"><p class="eyebrow"><span class="eyebrow-rule"></span> Experience across sectors</p><h2>Places made<br />for <em>what’s next.</em></h2><p>Commercial, residential and public-sector projects. A broad portfolio built on the detail, discipline and dedication of our teams.</p><a class="button button-light" href="#contact">Let’s build together <span aria-hidden="true">↗</span></a></div><span class="project-caption">FROM THE FIRST DRAWING<br />TO THE FINAL DETAIL</span></section>
+
+			<section class="contact-section" id="contact"><div class="wrap contact-layout"><div><p class="eyebrow"><span class="eyebrow-rule"></span> Start a conversation</p><h2>Let’s make<br /><em>something matter.</em></h2></div><div class="contact-details"><p>Have a project in mind, or want to learn more about the group? We’d be glad to hear from you.</p><a class="contact-email" href="mailto:beamco@beamcointl.com">beamco@beamcointl.com <span aria-hidden="true">↗</span></a><div class="contact-meta"><span>CALL THE GROUP</span><a href="tel:+97144226185">+971 4 422 6185</a><span>VISIT US</span><p>XL Tower, Business Bay<br />Dubai, United Arab Emirates</p></div></div></div></section>
+		</main>
+		<footer class="site-footer"><div class="wrap footer-main"><a class="brand brand-footer" href="#top"><span class="brand-mark">K<span>K</span>P</span><span class="brand-name">GROUP<span>UNITED ARAB EMIRATES</span></span></a><p>Building capability.<br />Creating what’s next.</p><div class="footer-links"><a href="#about">Our story</a><a href="#companies">Our companies</a><a href="#projects">Our work</a><a href="mailto:beamco@beamcointl.com">Email us ↗</a></div></div><div class="wrap footer-bottom"><span>© 2026 KKP Group · Prototype concept</span><span>Content and identity to be confirmed by KKP Group</span></div></footer>
+	</div>
+
+	<aside class="design-switcher" aria-label="Prototype design options">
+		<button class="switcher-trigger" type="button" aria-expanded="false" aria-controls="switcher-panel"><span class="switcher-icon" aria-hidden="true">◐</span><span>Explore designs</span><span class="switcher-chevron" aria-hidden="true">⌃</span></button>
+		<div class="switcher-panel" id="switcher-panel" hidden><p class="switcher-kicker">KKP GROUP · CONCEPTS</p><p class="switcher-title">Choose a direction</p><div class="design-options" role="group" aria-label="Choose a design"><button class="design-option" type="button" data-choice="modern" aria-pressed="true"><span class="option-swatch swatch-modern"></span><span><b>01 — Modern</b><small>Warm, confident, contemporary</small></span><span class="option-check">✓</span></button><button class="design-option" type="button" data-choice="heritage" aria-pressed="false"><span class="option-swatch swatch-heritage"></span><span><b>02 — Heritage</b><small>Classic corporate, established</small></span><span class="option-check">✓</span></button><button class="design-option" type="button" data-choice="editorial" aria-pressed="false"><span class="option-swatch swatch-editorial"></span><span><b>03 — Editorial</b><small>Bold, expressive, distinctive</small></span><span class="option-check">✓</span></button></div><p class="switcher-hint">This prototype switcher is visible for review only.</p></div>
+	</aside>
+
+	<script>
+		const shell = document.querySelector('.site-shell');
+		const trigger = document.querySelector('.switcher-trigger');
+		const panel = document.querySelector('.switcher-panel');
+		const choices = [...document.querySelectorAll('.design-option')];
+		const menuToggle = document.querySelector('.menu-toggle');
+		const nav = document.querySelector('.main-nav');
+
+		const setDesign = (design) => {
+			if (!['modern', 'heritage', 'editorial'].includes(design)) return;
+			shell?.setAttribute('data-design', design);
+			choices.forEach((choice) => choice.setAttribute('aria-pressed', String(choice.dataset.choice === design)));
+			try { localStorage.setItem('kkp-design', design); } catch {}
+		};
+
+		try {
+			const savedDesign = localStorage.getItem('kkp-design');
+			if (savedDesign) setDesign(savedDesign);
+		} catch {}
+
+		trigger?.addEventListener('click', () => {
+			const open = trigger.getAttribute('aria-expanded') !== 'true';
+			trigger.setAttribute('aria-expanded', String(open));
+			if (panel) panel.hidden = !open;
+		});
+		choices.forEach((choice) => choice.addEventListener('click', () => setDesign(choice.dataset.choice ?? 'modern')));
+		menuToggle?.addEventListener('click', () => {
+			const open = menuToggle.getAttribute('aria-expanded') !== 'true';
+			menuToggle.setAttribute('aria-expanded', String(open));
+			nav?.classList.toggle('is-open', open);
+		});
+		nav?.querySelectorAll('a').forEach((link) => link.addEventListener('click', () => {
+			nav.classList.remove('is-open');
+			menuToggle?.setAttribute('aria-expanded', 'false');
+		}));
+	</script>
 </Layout>

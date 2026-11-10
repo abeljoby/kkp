@@ -1,12 +1,20 @@
+---
+import '../styles/global.css';
+
+const title = 'KKP Group | Building What Moves Business';
+const description = 'KKP Group brings together specialist businesses in engineering, construction, interiors, facilities management and business services across the UAE.';
+
+---
 <!doctype html>
 <html lang="en">
 	<head>
 		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="description" content={description} />
+		<meta name="theme-color" content="#17333a" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
 		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
+		<title>{title}</title>
 	</head>
 	<body>
 		<slot />
