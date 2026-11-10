@@ -21,7 +21,7 @@ Use the port reported by `status`; another process or stale lock can cause Astro
 
 - This is a static Astro landing-page prototype for the UAE-based KKP Group. The default Astro output is static, and `npm run build` writes deployable files to `dist/`.
 - The intended cPanel deployment is to build with Node/npm, then upload the contents of `dist/` to the cPanel document root. Node.js is not required on the host for this static site.
-- The current homepage has three review concepts (Modern, Heritage, Editorial) selected through the floating design switcher. Keep them switchable until stakeholders pick a direction. They share page content and use CSS themes selected by `.site-shell[data-design]`.
+- The homepage has six review concepts in the floating design switcher: new Signature, Corporate and Precision designs, plus the preserved Modern, Heritage and Editorial references. Keep all six switchable until stakeholders pick a direction. New concepts share one page with `.new-shell[data-design]` themes; original concepts live in `LegacyHome.astro` with scoped legacy styles. Company and principles data are shared in `src/data/group.ts`.
 - Content and contact details were adapted from the former Beamco site and are provisional. Do not treat company names, group history, claims, or contact information as client-approved. See `README.md` for the review checklist and decisions.
 - The future material request form and approval workflow are out of scope for this static prototype. They will need a backend with authentication, durable storage, and server-enforced approvals; do not implement approval state in local storage or the public page.
 - Keep `README.md` current when hosting, content, architecture, or design-direction decisions change.
