@@ -48,6 +48,20 @@ All directions share one set of semantic page content; `data-design` on the `.si
 
 Supporting text follows a shared readability scale across concepts: body text is roughly 15–17px, secondary copy 13–15px, and labels at least 12px; display-heading sizes are intentionally preserved.
 
+## Image assets
+
+The original Beamco website's publicly referenced images are retained in
+`public/images/beamco/webimg/`. This is a source archive of 172 files,
+preserving the former site's filenames so a relevant photo can be identified
+and promoted into a future KKP page without depending on the old host. The
+archive includes brand-era logos, responsive banners, team and company imagery,
+project photography, and interface graphics.
+
+These images are source material only. Confirm client ownership and which images
+are approved for the KKP Group before publishing them on the new site. The
+client-supplied KKP Group logo is at `public/images/brand/kkp-group-logo.png`
+and is used in the site header and footer.
+
 ## Page content and open decisions
 
 The homepage is in `src/pages/index.astro`; its page-level styles are in `src/styles/global.css`; the document metadata and shared layout are in `src/layouts/Layout.astro`.
@@ -83,6 +97,7 @@ src/
   styles/global.css         Responsive layout, typography, illustrations, and themes
 public/
   favicon.svg               Prototype KKP monogram favicon
+  images/beamco/webimg/     Archived public Beamco source imagery (172 files)
 ```
 
 See [Astro documentation](https://docs.astro.build/) for framework guidance.
