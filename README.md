@@ -62,6 +62,17 @@ are approved for the KKP Group before publishing them on the new site. The
 client-supplied KKP Group logo is at `public/images/brand/kkp-group-logo.png`
 and is used in the site header and footer.
 
+The landing page uses the six relevant legacy inner banners as low-contrast
+cover images for the group-company cards: Beam Electro-Mechanical (13), Beam
+Carpentry (04), FIS Interior Decoration (05), Superfine Services (08), Mint
+Business Center (07), and Eminent Contracting (09). The shared Astro company
+data keeps those labels, descriptions, and image mappings identical in all
+three review concepts.
+
+The landing page also uses the former site’s chairman photograph and a Beam
+Electro-Mechanical project photograph. These assets are shown with captions or
+alt text and remain subject to client approval for the KKP Group site.
+
 ## Page content and open decisions
 
 The homepage is in `src/pages/index.astro`; its page-level styles are in `src/styles/global.css`; the document metadata and shared layout are in `src/layouts/Layout.astro`.
