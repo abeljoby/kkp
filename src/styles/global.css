@@ -228,4 +228,68 @@ a { color: inherit; }
 	.site-shell[data-design="editorial"] .project-content h2 { font-size: clamp(70px,18vw,100px); }
 	.site-shell[data-design="editorial"] .contact-layout { grid-template-columns: 1fr; gap: 20px; }
 }
+
+/* Shared reading scale: headings stay as designed; supporting text stays legible. */
+.site-shell[data-design] { --copy-size: 16px; --support-size: 14px; --label-size: 12px; }
+.site-shell[data-design] .utility-bar { font-size: var(--label-size); }
+.site-shell[data-design] .utility-inner > span,.site-shell[data-design] .utility-links a { font-size: var(--label-size); }
+.site-shell[data-design] .main-nav a,.site-shell[data-design] .header-cta { font-size: var(--support-size); }
+.site-shell[data-design] .hero-copy { max-width: 500px; font-size: 17px; line-height: 1.65; }
+.site-shell[data-design] .text-link { font-size: var(--support-size); }
+.site-shell[data-design] .button { font-size: var(--support-size); }
+.site-shell[data-design] .hero-foot { font-size: var(--label-size); }
+.site-shell[data-design] .proof-label,.site-shell[data-design] .proof-item span { font-size: var(--support-size); }
+.site-shell[data-design] .section-intro { font-size: var(--copy-size); line-height: 1.7; }
+.site-shell[data-design] .company-number { font-size: var(--label-size); }
+.site-shell[data-design] .company-name { font-size: 18px; }
+.site-shell[data-design] .company-type { font-size: var(--support-size); }
+.site-shell[data-design] .content-note { font-size: var(--label-size); line-height: 1.65; }
+.site-shell[data-design] .story-index { font-size: var(--label-size); }
+.site-shell[data-design] .story-copy { font-size: 15px; line-height: 1.75; }
+.site-shell[data-design] .values-title > p:last-child { font-size: 15px; line-height: 1.7; }
+.site-shell[data-design] .value-row > span:first-child { font-size: var(--label-size); }
+.site-shell[data-design] .value-row h3 { font-size: 19px; }
+.site-shell[data-design] .value-row p { font-size: var(--support-size); line-height: 1.65; }
+.site-shell[data-design] .project-content > p:not(.eyebrow) { font-size: 15px; line-height: 1.7; }
+.site-shell[data-design] .contact-details > p { font-size: 15px; line-height: 1.7; }
+.site-shell[data-design] .contact-meta > span { font-size: var(--label-size); }
+.site-shell[data-design] .contact-meta a,.site-shell[data-design] .contact-meta p { font-size: var(--support-size); }
+.site-shell[data-design] .contact-email { font-size: clamp(18px,2vw,25px); }
+.site-shell[data-design] .footer-links a { font-size: var(--support-size); }
+.site-shell[data-design] .footer-bottom { font-size: var(--label-size); }
+.design-switcher { --support-size: 14px; --label-size: 12px; width: 350px; }
+.switcher-trigger { font-size: var(--support-size); }
+.switcher-kicker { font-size: var(--label-size); }
+.switcher-title { font-size: 19px; }
+.design-option b { font-size: var(--support-size); }
+.design-option small { font-size: var(--label-size); }
+.switcher-hint { font-size: var(--label-size); }
+
+@media (max-width: 900px) {
+	.site-shell[data-design] { --copy-size: 15px; --support-size: 13px; }
+	.site-shell[data-design] .main-nav a { font-size: var(--label-size); }
+	.site-shell[data-design] .proof-label,.site-shell[data-design] .proof-item span { font-size: var(--label-size); }
+	.site-shell[data-design] .company-type { font-size: var(--label-size); }
+	.site-shell[data-design] .story-copy { font-size: var(--support-size); }
+	.site-shell[data-design] .value-row h3 { font-size: 17px; }
+	.site-shell[data-design] .value-row p { font-size: var(--label-size); }
+}
+@media (max-width: 640px) {
+	.site-shell[data-design] { --copy-size: 15px; --support-size: 13px; --label-size: 12px; }
+	.site-shell[data-design] .utility-links a { font-size: 12px; }
+	.site-shell[data-design] .main-nav a { font-size: 14px; }
+	.site-shell[data-design] .hero-copy { font-size: 15px; }
+	.site-shell[data-design] .button,.site-shell[data-design] .text-link { font-size: 13px; }
+	.site-shell[data-design] .proof-label,.site-shell[data-design] .proof-item span { font-size: 12px; }
+	.site-shell[data-design] .company-name { font-size: 15px; }
+	.site-shell[data-design] .company-type { font-size: 12px; }
+	.site-shell[data-design] .story-copy,.site-shell[data-design] .values-title > p:last-child,.site-shell[data-design] .project-content > p:not(.eyebrow),.site-shell[data-design] .contact-details > p { font-size: 14px; }
+	.site-shell[data-design] .value-row h3 { font-size: 16px; }
+	.site-shell[data-design] .value-row p { font-size: 13px; }
+	.site-shell[data-design] .contact-meta > span { font-size: 12px; }
+	.site-shell[data-design] .contact-meta a,.site-shell[data-design] .contact-meta p { font-size: 13px; }
+	.site-shell[data-design] .footer-links a { font-size: 13px; }
+	.site-shell[data-design] .footer-bottom { font-size: 12px; }
+	.design-switcher { width: min(350px,calc(100% - 32px)); }
+}
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *,*::before,*::after { transition-duration: .01ms !important; animation-duration: .01ms !important; } }
