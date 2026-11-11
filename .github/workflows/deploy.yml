@@ -18,6 +18,8 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+      - name: Check out the repository
+        uses: actions/checkout@v6
       - name: Build and upload the Astro site
         uses: withastro/action@v6
         with:
