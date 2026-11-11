@@ -28,9 +28,11 @@ npm run preview
 
 The static build is written to `dist/`. The build currently completes successfully.
 
-## Deployment decision
+## GitHub Pages deployment
 
-The prototype uses Astro's default static output. Build it in CI or on a machine with Node.js, then upload the **contents** of `dist/` to the cPanel document root (commonly `public_html`). The website host does not need to run Node.js for these static files.
+The project is configured for the project-page URL `https://abeljoby.github.io/kkp/`. Astro's `site` and `base` settings include the repository path, and local images and the favicon use that base path. The `.github/workflows/deploy.yml` workflow builds and deploys the static site to GitHub Pages whenever changes are pushed to `dev`; it can also be run manually from the Actions tab. In repository settings, set **Pages → Build and deployment → Source** to **GitHub Actions**.
+
+The generated static site is written to `dist/`. Node.js is used by the workflow to build the site; GitHub Pages serves the resulting static files without a server runtime.
 
 The page has no working form submission or server-side behavior. Email and phone links use the contact details currently published by Beamco; confirm them before launch. Future dynamic features should be designed separately from this static marketing page.
 
@@ -123,14 +125,14 @@ Before public launch, confirm:
 
 ## Future MRF workflow
 
-A material request form with approvals needs a trusted backend, identity/access control, durable storage, and an approval workflow. Do not model approvals or store sensitive requests only in browser state. The static public site can remain on cPanel while the MRF is provided by a separate API/application, or the hosting plan can be revisited when a server runtime is chosen.
+A material request form with approvals needs a trusted backend, identity/access control, durable storage, and an approval workflow. Do not model approvals or store sensitive requests only in browser state. The static public site can remain on GitHub Pages while the MRF is provided by a separate API/application, or the hosting plan can be revisited when a server runtime is chosen.
 
 ## Handoff notes
 
 - Keep the design concepts switchable while stakeholder review is in progress; keep all seven in the documented order, preserve previous iterations separately, and update company identity data in its shared module.
 - Keep provisional source-site details identified as provisional until the client confirms them.
 - There is no React/Vue/Svelte island or backend integration in the prototype.
-- For cPanel, deploy the generated `dist/` files, not `src/` or `node_modules/`.
+- The GitHub Pages workflow deploys the generated `dist/` output; do not publish `src/` or `node_modules/` as the site.
 - Avoid adding a backend adapter unless server-rendered routes are intentionally introduced and the target runtime is available.
 
 ## Project structure
