@@ -1,0 +1,106 @@
+/* Modern geometry and component styling with Heritage's palette and typefaces. */
+.legacy-shell .site-shell.hybrid-shell[data-design='modern'] {
+  --ink: #142b46;
+  --muted: #687887;
+  --paper: #f6f5f1;
+  --surface: #fff;
+  --accent: #d6a94c;
+  --accent-dark: #a77c2c;
+  --line: #dce1e6;
+  --dark: #142d4d;
+  --hero-bg: #e8edf1;
+  --display: 'Cormorant Garamond', Georgia, serif;
+  --body: 'Source Sans 3', Arial, sans-serif;
+  --serif: 'Cormorant Garamond', Georgia, serif;
+  font-family: var(--body);
+
+  h1, h2, h3, .company-name, .proof-item strong, .story-index, .story-index b,
+  .company-monogram, .contact-email, .footer-main > p { font-family: var(--display); }
+  h1, h2 { font-weight: 500; letter-spacing: -.035em; }
+  h3, .company-name { font-weight: 600; letter-spacing: -.01em; }
+  .main-nav a, .header-cta, .button, .text-link { font-family: var(--body); }
+  .main-nav a, .header-cta { letter-spacing: .05em; }
+  .hero-copy, .main-nav a, .contact-details > p, .contact-meta > span { color: var(--muted); }
+  .company-name { font-size: 23px; line-height: 1.1; }
+  .company-top { color: var(--muted); }
+  .company-monogram { background: var(--dark); color: var(--accent); }
+  .company-cover { filter: saturate(.56) sepia(.08); }
+  .proof-strip { background: #fff; color: var(--ink); border-block: 1px solid var(--line); }
+  .proof-label, .proof-item span { color: var(--muted); }
+  .proof-item { border-color: var(--line); }
+  .proof-item strong { color: var(--dark); font-weight: 600; }
+  .story-image { background: #e6e8e4; }
+  .values-section { background: #eceff1; }
+  .contact-section { background: #e5ebef; }
+  .contact-email, .contact-meta a, .contact-meta p { color: var(--ink); }
+  .site-footer { background: #102542; }
+  .project-ring { border-color: #d6a94c38; }
+  .project-dot { background: var(--accent); box-shadow: 0 0 0 14px #d6a94c21,0 0 60px 15px #d6a94c4d; }
+  .project-block { border-color: #d6a94c80; }
+  .project-block::before, .project-block::after { background: repeating-linear-gradient(to bottom,transparent 0 19px,#d6a94c8c 20px 22px,transparent 23px 41px); }
+  ::selection { background: var(--accent); color: var(--dark); }
+}
+@media (max-width: 640px) {
+  .legacy-shell .site-shell.hybrid-shell[data-design='modern'] .company-name { font-size: 19px; }
+}
+
+/* Option 04 reading scale: at least +2px for supporting text, no heading changes. */
+.legacy-shell .site-shell.hybrid-shell[data-design='modern'] {
+  --copy-size: 18px;
+  --support-size: 16px;
+  --label-size: 14px;
+
+  .utility-inner > span, .utility-links a, .company-number, .content-note,
+  .story-index, .value-row > span:first-child, .contact-meta > span,
+  .footer-bottom { font-size: var(--label-size); }
+  .main-nav a, .header-cta, .button, .text-link, .proof-label, .proof-item span,
+  .company-type, .value-row p, .contact-meta a, .contact-meta p,
+  .footer-links a { font-size: var(--support-size); }
+  .hero-copy { font-size: 19px; }
+  .section-intro { font-size: var(--copy-size); }
+  .story-copy, .values-title > p:last-child, .project-content > p:not(.eyebrow),
+  .contact-details > p { font-size: 17px; }
+  .proof-item strong, .proof-link { font-size: 29px; }
+  .company-monogram { font-size: 16px; }
+  .content-note sup { font-size: 11px; }
+  .story-index b { font-size: 25px; }
+  .story-image figcaption { font-size: 12px; }
+  .contact-email { font-size: clamp(20px, calc(2vw + 2px), 27px); }
+  .footer-main > p { font-size: 19px; }
+
+  .hybrid-hero-photo { position: absolute; z-index: -2; inset: 0 0 0 auto; width: 67%; height: 100%; object-fit: cover; object-position: 60% center; }
+}
+@media (max-width: 640px) {
+  .legacy-shell .site-shell.hybrid-shell[data-design='modern'] {
+    .hero { min-height: 0; }
+    .hero-content { padding-bottom: 315px; }
+    .hero-copy { font-size: 17px; }
+    .hero::after { background: linear-gradient(180deg, var(--hero-bg) 0%, var(--hero-bg) calc(100% - 290px), transparent calc(100% - 120px)); }
+    .hybrid-hero-photo { inset: auto 0 0; width: 100%; height: 290px; }
+    .proof-item strong { font-size: 24px; }
+    .proof-link { font-size: 22px; }
+    .story-index b { font-size: 22px; }
+    .footer-main > p { font-size: 16px; }
+    .footer-bottom { padding-bottom: 95px; }
+  }
+}
+
+/* Separate photography from the copy so every company card remains readable. */
+.legacy-shell .site-shell.hybrid-shell[data-design='modern'] {
+  .company-grid { gap: 22px; border: 0; }
+  .company-card { padding: 0; min-height: 0; border: 1px solid var(--line); background: #fff; overflow: hidden; box-shadow: none; align-items: stretch; }
+  .hybrid-company-image { overflow: hidden; }
+  .company-cover { position: static; display: block; height: 190px; width: 100%; object-fit: cover; opacity: 1; filter: none; }
+  .company-card:hover .company-cover { opacity: 1; filter: none; }
+  .company-number { position: absolute; top: 14px; left: 14px; padding: 5px 9px; background: #fff; color: var(--ink); line-height: 1.4; }
+  .hybrid-company-copy { flex: 1; padding: 23px 44px 25px 23px; background: #fff; }
+  .company-name, .company-type { display: block; }
+  .company-type { color: #506071; line-height: 1.6; margin-top: 10px; }
+  .company-arrow { position: absolute; right: 20px; top: 23px; }
+}
+@media (max-width: 900px) {
+  .legacy-shell .site-shell.hybrid-shell[data-design='modern'] .company-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 640px) {
+  .legacy-shell .site-shell.hybrid-shell[data-design='modern'] .company-grid { grid-template-columns: 1fr; }
+}
