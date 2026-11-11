@@ -20,12 +20,7 @@ import { companies, values } from "../data/group";
 
 		<main id="legacy-top">
 			<section class="hero">
-				<div class="hero-art" aria-hidden="true">
-					<div class="art-grid"></div><div class="art-orbit orbit-one"></div><div class="art-orbit orbit-two"></div>
-					<div class="art-building building-back"><i></i><i></i><i></i><i></i><i></i></div>
-					<div class="art-building building-front"><i></i><i></i><i></i><i></i><i></i><i></i></div>
-					<div class="art-sun"></div><div class="art-base"></div>
-				</div>
+				<img class="hybrid-hero-photo" src="/images/beamco/webimg/hbanner01.jpg" alt="Building services across a Dubai rooftop, with the city skyline beyond" width="1920" height="700" fetchpriority="high" />
 				<div class="wrap hero-content">
 					<h1>Engineering, construction<br />and property services<span class="hero-period">.</span></h1>
 					<p class="hero-copy">We provide specialist engineering, construction, interior, facilities management and business services across the UAE. Our operating history began in Dubai in 1980 as Beamco Group.</p>
@@ -39,7 +34,7 @@ import { companies, values } from "../data/group";
 				<div class="wrap">
 					<div class="section-heading"><div><h2>Our companies<br />and capabilities.</h2></div><p class="section-intro">We bring together MEP contracting, construction, joinery, interior fit-out, facilities management and business-centre services.</p></div>
 					<div class="company-grid">
-						{companies.map((company) => <a class="company-card" href="#legacy-contact"><img class="company-cover" src={company.image} alt="" /><span class="company-top"><span class="company-number">{company.number}</span><span class="company-arrow" aria-hidden="true">↗</span></span><span class="company-monogram">{company.initials}</span><span class="company-name">{company.name}</span><span class="company-type">{company.type}</span></a>)}
+						{companies.map((company) => <a class="company-card" href="#legacy-contact"><div class="hybrid-company-image"><img class="company-cover" src={company.image} alt="" width="1920" height="552" loading="lazy" /><span class="company-number">{company.number}</span></div><div class="hybrid-company-copy"><span class="company-name">{company.name}</span><span class="company-type">{company.type}</span><span class="company-arrow" aria-hidden="true">↗</span></div></a>)}
 					</div>
 					<p class="content-note"><sup>1</sup> KKP Group is the successor identity to Beamco Group. Company names, service descriptions and contact details remain subject to client confirmation.</p>
 				</div>

@@ -34,14 +34,6 @@
   .contact-section { background: #e5ebef; }
   .contact-email, .contact-meta a, .contact-meta p { color: var(--ink); }
   .site-footer { background: #102542; }
-  .art-grid { background-image: linear-gradient(#142d4d24 1px,transparent 1px),linear-gradient(90deg,#142d4d24 1px,transparent 1px); }
-  .art-orbit { border-color: #142d4d38; }
-  .art-sun { background: linear-gradient(140deg,#d6a94c55,#e3d6b5 65%,transparent 66%); }
-  .art-building { background: linear-gradient(140deg,#8192a4,#324d6c 78%); box-shadow: 20px 22px 50px #142d4d24; }
-  .building-front { background: linear-gradient(140deg,#a2adba,#62788e 78%); }
-  .art-building i { background: repeating-linear-gradient(to bottom,transparent 0 17px,#e8edf1cc 18px 21px,transparent 22px 34px); }
-  .building-front i { background: repeating-linear-gradient(to bottom,transparent 0 13px,#f4e5c4d9 14px 17px,transparent 18px 28px); }
-  .art-base { background: linear-gradient(165deg,#dce1e6,#aabaca); }
   .project-ring { border-color: #d6a94c38; }
   .project-dot { background: var(--accent); box-shadow: 0 0 0 14px #d6a94c21,0 0 60px 15px #d6a94c4d; }
   .project-block { border-color: #d6a94c80; }
@@ -50,4 +42,65 @@
 }
 @media (max-width: 640px) {
   .legacy-shell .site-shell.hybrid-shell[data-design='modern'] .company-name { font-size: 19px; }
+}
+
+/* Option 04 reading scale: at least +2px for supporting text, no heading changes. */
+.legacy-shell .site-shell.hybrid-shell[data-design='modern'] {
+  --copy-size: 18px;
+  --support-size: 16px;
+  --label-size: 14px;
+
+  .utility-inner > span, .utility-links a, .company-number, .content-note,
+  .story-index, .value-row > span:first-child, .contact-meta > span,
+  .footer-bottom { font-size: var(--label-size); }
+  .main-nav a, .header-cta, .button, .text-link, .proof-label, .proof-item span,
+  .company-type, .value-row p, .contact-meta a, .contact-meta p,
+  .footer-links a { font-size: var(--support-size); }
+  .hero-copy { font-size: 19px; }
+  .section-intro { font-size: var(--copy-size); }
+  .story-copy, .values-title > p:last-child, .project-content > p:not(.eyebrow),
+  .contact-details > p { font-size: 17px; }
+  .proof-item strong, .proof-link { font-size: 29px; }
+  .company-monogram { font-size: 16px; }
+  .content-note sup { font-size: 11px; }
+  .story-index b { font-size: 25px; }
+  .story-image figcaption { font-size: 12px; }
+  .contact-email { font-size: clamp(20px, calc(2vw + 2px), 27px); }
+  .footer-main > p { font-size: 19px; }
+
+  .hybrid-hero-photo { position: absolute; z-index: -2; inset: 0 0 0 auto; width: 67%; height: 100%; object-fit: cover; object-position: 60% center; }
+}
+@media (max-width: 640px) {
+  .legacy-shell .site-shell.hybrid-shell[data-design='modern'] {
+    .hero { min-height: 0; }
+    .hero-content { padding-bottom: 315px; }
+    .hero-copy { font-size: 17px; }
+    .hero::after { background: linear-gradient(180deg, var(--hero-bg) 0%, var(--hero-bg) calc(100% - 290px), transparent calc(100% - 120px)); }
+    .hybrid-hero-photo { inset: auto 0 0; width: 100%; height: 290px; }
+    .proof-item strong { font-size: 24px; }
+    .proof-link { font-size: 22px; }
+    .story-index b { font-size: 22px; }
+    .footer-main > p { font-size: 16px; }
+    .footer-bottom { padding-bottom: 95px; }
+  }
+}
+
+/* Separate photography from the copy so every company card remains readable. */
+.legacy-shell .site-shell.hybrid-shell[data-design='modern'] {
+  .company-grid { gap: 22px; border: 0; }
+  .company-card { padding: 0; min-height: 0; border: 1px solid var(--line); background: #fff; overflow: hidden; box-shadow: none; align-items: stretch; }
+  .hybrid-company-image { overflow: hidden; }
+  .company-cover { position: static; display: block; height: 190px; width: 100%; object-fit: cover; opacity: 1; filter: none; }
+  .company-card:hover .company-cover { opacity: 1; filter: none; }
+  .company-number { position: absolute; top: 14px; left: 14px; padding: 5px 9px; background: #fff; color: var(--ink); line-height: 1.4; }
+  .hybrid-company-copy { flex: 1; padding: 23px 44px 25px 23px; background: #fff; }
+  .company-name, .company-type { display: block; }
+  .company-type { color: #506071; line-height: 1.6; margin-top: 10px; }
+  .company-arrow { position: absolute; right: 20px; top: 23px; }
+}
+@media (max-width: 900px) {
+  .legacy-shell .site-shell.hybrid-shell[data-design='modern'] .company-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 640px) {
+  .legacy-shell .site-shell.hybrid-shell[data-design='modern'] .company-grid { grid-template-columns: 1fr; }
 }

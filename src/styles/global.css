@@ -232,10 +232,11 @@ img { display: block; max-width: 100%; }
 .new-shell[data-design='precision'] .footer-bottom { border-color: #ffffff30; color: #c4cede; }
 /* Review UI lives outside the page themes. */
 .design-switcher { position: fixed; z-index: 50; right: 22px; bottom: 20px; width: 370px; max-width: calc(100vw - 28px); font-family: 'Inter',Arial,sans-serif; color: #16243c; }
-.switcher-trigger { margin-left: auto; display: flex; align-items: center; gap: 13px; padding: 13px 18px; background: #fff; border: 1px solid #d8dee8; box-shadow: 0 5px 30px #071d3d26; color: #1a2b48; text-align: left; font-size: 13px; }
-.switcher-trigger b { display: block; margin-top: 3px; font-size: 11px; color: #637086; font-weight: 450; }
-.switcher-icon { font-size: 24px; color: #123d8d; }
-.switcher-chevron { margin-left: 12px; font-size: 19px; }
+.switcher-trigger { margin-left: auto; display: flex; align-items: center; gap: 13px; padding: 13px 18px; background: #ffdf00; border: 1px solid #d6b900; box-shadow: 0 5px 30px #071d3d40; color: #17273e; text-align: left; font-size: 13px; font-weight: 650; transition: background-color .15s, box-shadow .15s, transform .15s; }
+.switcher-trigger:hover { background: #f5d400; box-shadow: 0 7px 32px #071d3d50; transform: translateY(-1px); }
+.switcher-trigger b { display: block; margin-top: 3px; font-size: 11px; color: #38435a; font-weight: 600; }
+.switcher-icon { font-size: 24px; color: #17273e; }
+.switcher-chevron { margin-left: 12px; font-size: 19px; color: #17273e; }
 .switcher-trigger[aria-expanded='true'] .switcher-chevron { transform: rotate(180deg); }
 .switcher-panel { position: absolute; right: 0; bottom: calc(100% + 10px); width: 100%; background: #fff; border: 1px solid #d8dee8; padding: 18px; box-shadow: 0 12px 50px #071d3d26; max-height: calc(100dvh - 110px); overflow-y: auto; }
 .switcher-heading { display: flex; align-items: center; justify-content: space-between; }
