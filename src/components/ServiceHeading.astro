@@ -1,0 +1,5 @@
+---
+interface Props { prefix?: string }
+const { prefix = '' } = Astro.props;
+---
+<div class="service-heading-box"><h2 id={`${prefix}service-heading`}>Find the service you need</h2></div>

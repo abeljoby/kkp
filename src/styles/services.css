@@ -1,0 +1,127 @@
+/* Shared behaviour, with presentation inherited from each of the seven themes. */
+/* Shared shell tokens keep the hero tab and scrolling row visually connected. */
+.site-shell {
+  --strip-height: 82px;
+  --strip-background: #fff;
+  --strip-ink: var(--blue, #142d4d);
+  --strip-line: var(--line, #dce1e6);
+}
+.site-shell .service-strip {
+  position: relative;
+  height: var(--strip-height);
+  color: var(--strip-ink);
+  background: var(--strip-background);
+  border-bottom: 1px solid var(--strip-line);
+  overflow: hidden;
+}
+.site-shell .service-heading-box {
+  position: absolute;
+  z-index: 4;
+  bottom: 0;
+  left: max(28px, calc((100% - 1380px) / 2));
+  max-width: calc(100% - 32px);
+  padding: 16px 24px;
+  background: var(--strip-background);
+  color: var(--strip-ink);
+  border: 1px solid var(--strip-line);
+  border-bottom: 0;
+}
+.site-shell .service-heading-box h2 { margin: 0; font: 550 14px/1.5 'Inter', Arial, sans-serif; letter-spacing: 0; color: inherit; }
+.site-shell .service-viewport { overflow-x: auto; overflow-y: hidden; scrollbar-width: thin; height: 100%; }
+.site-shell .service-track { display: flex; width: max-content; min-height: 100%; }
+.site-shell .service-group { display: flex; align-items: center; flex: 0 0 auto; justify-content: space-around; min-width: 100vw; list-style: none; padding: 0 0 0 28px; margin: 0; }
+.site-shell .service-group[aria-hidden='true'] { display: none; }
+.site-shell .service-group li { flex: 0 0 auto; margin: 0; }
+.site-shell .service-group a { display: flex; align-items: center; gap: 30px; white-space: nowrap; color: inherit; text-decoration: none; padding: 15px 34px; border-right: 1px solid var(--strip-line); min-height: 52px; }
+.site-shell .service-name { font: 500 22px/1.25 'Inter', Arial, sans-serif; letter-spacing: -.025em; }
+.site-shell .service-arrow { display: block; flex: 0 0 24px; color: currentColor; opacity: .8; }
+.site-shell .service-group a:hover { text-decoration: underline; text-underline-offset: 6px; }
+.site-shell .service-group a:focus-visible { outline: 2px solid currentColor; outline-offset: -4px; }
+.site-shell .is-enhanced .service-viewport { overflow-x: hidden; }
+.site-shell .is-enhanced .service-track { animation: service-scroll 65s linear infinite; }
+.site-shell .is-enhanced .service-group[aria-hidden='true'] { display: flex; }
+.site-shell .service-strip:is(:hover, .is-offscreen, :focus-within) .service-track { animation-play-state: paused; }
+.site-shell .service-track:has(a:focus-visible) { animation: none; transform: none; }
+.site-shell .service-strip:has(.service-track:has(a:focus-visible)) .service-viewport { overflow-x: auto; }
+.site-shell .service-track:has(a:focus-visible) .service-group[aria-hidden='true'] { display: none; }
+@keyframes service-scroll { to { transform: translateX(-50%); } }
+
+.previous-shell[data-design='corporate'] { --strip-background: var(--navy); --strip-ink: var(--gold); --strip-line: #ffffff35; }
+.previous-shell[data-design='precision'] { --strip-background: var(--navy); --strip-ink: var(--gold); --strip-line: #ffffff35; }
+.new-shell[data-design='signature'] { --strip-background: var(--navy); --strip-ink: var(--gold); --strip-line: #ffffff35; }
+.new-shell[data-design='corporate'] { --strip-background: var(--paper); --strip-ink: var(--blue); }
+.new-shell[data-design='precision'] { --strip-background: var(--navy); --strip-ink: #fff; --strip-line: #ffffff35; }
+.legacy-shell .hybrid-shell[data-design='modern'] { --strip-ink: var(--dark); --strip-line: var(--line); }
+.legacy-shell .hybrid-shell[data-design='modern'] .service-heading-box { left: max(14px, calc((100% - 1260px) / 2)); }
+.legacy-shell .hybrid-shell[data-design='modern'] .service-heading-box h2 { font: 500 16px/1.5 var(--body); letter-spacing: 0; }
+.legacy-shell .hybrid-shell[data-design='modern'] .service-name { font: 600 27px/1.2 var(--display); letter-spacing: -.01em; }
+
+/* Automatic hero photography, with space reserved for the attached service tab. */
+.site-shell .slideshow-photo { opacity: 0; transition: opacity .8s ease; }
+.site-shell .slideshow-photo.is-active { opacity: 1; }
+.new-shell .opening { position: relative; padding-bottom: 72px; }
+.new-shell .opening-image .slideshow-photo { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.legacy-shell .hybrid-hero-slideshow { position: absolute; inset: 0; z-index: -2; }
+.previous-shell[data-design='corporate'] .hero { border-bottom: 0; }
+
+/* Cards keep their existing image/layout treatment and grow to reveal the profile. */
+.site-shell .interactive-company { position: relative; scroll-margin-block: 35px; }
+.site-shell .interactive-company > .company-toggle { position: absolute; z-index: 2; inset: 0; width: 100%; height: 100%; background: transparent; border: 0; border-radius: 0; cursor: pointer; }
+.site-shell .interactive-company > .company-toggle:focus-visible { outline: 3px solid var(--gold, var(--accent, #d6a94c)); outline-offset: -4px; }
+.site-shell .interactive-company > .company-reveal { position: relative; z-index: 3; padding-top: 20px; border-top: 1px solid currentColor; margin-top: 20px; }
+.site-shell .company-reveal > p { font: 400 15px/1.65 'Inter',Arial,sans-serif; letter-spacing: 0; color: inherit; margin: 0; }
+.site-shell .company-view { position: relative; z-index: 3; display: inline-flex; align-items: center; justify-content: space-between; gap: 24px; margin-top: 19px; padding: 11px 0; background: transparent; color: inherit; border: 0; border-bottom: 1px solid currentColor; border-radius: 0; text-decoration: none; font: 600 14px/1.4 'Inter',Arial,sans-serif; cursor: pointer; }
+.site-shell .company-view:hover { opacity: .75; }
+.site-shell .interactive-company.is-expanded { box-shadow: inset 0 -3px var(--gold, var(--accent, #d6a94c)); }
+.previous-shell[data-design='signature'] .company-card.is-expanded { min-height: 460px; }
+.previous-shell[data-design='signature'] .company-card.is-expanded::after { background: linear-gradient(180deg,#081a3140,#081a31f5 60%); }
+.previous-shell[data-design='signature'] .company-reveal { border-color: #ffffff50; }
+.previous-shell[data-design='signature'] .company-view { color: var(--gold); }
+.previous-shell[data-design='corporate'] .company-reveal { grid-column: 1 / -1; margin-inline: 35px 24px; border-color: var(--line); }
+.previous-shell[data-design='corporate'] .company-view, .previous-shell[data-design='precision'] .company-view { color: var(--blue); }
+.previous-shell[data-design='precision'] .company-reveal { grid-column: 2 / -1; grid-row: 2; margin: 0; padding: 20px 30px 0 0; border-color: var(--line); max-width: 750px; }
+.previous-shell[data-design='precision'] .company-card.is-expanded { background: var(--paper); }
+.legacy-shell .hybrid-shell[data-design='modern'] .company-reveal { padding: 0 23px 25px; margin: 0; border: 0; background: #fff; }
+.legacy-shell .hybrid-shell[data-design='modern'] .company-reveal > p { font: 400 17px/1.65 var(--body); color: #506071; }
+.legacy-shell .hybrid-shell[data-design='modern'] .company-view { font-family: var(--body); font-size: 16px; color: var(--dark); }
+.new-shell .directory-entry.is-expanded { background: var(--paper); }
+.new-shell .directory-entry .company-view { color: var(--blue); }
+.new-shell .directory-body { position: relative; z-index: 3; }
+.new-shell .company-directory { align-items: start; }
+
+/* One accessible preview stands in for future dedicated company routes. */
+.company-preview { --preview-ink: #17273e; --preview-blue: #123d8d; --preview-gold: #d9b55c; --preview-bg: #fff; width: min(700px, calc(100vw - 32px)); max-height: calc(100dvh - 40px); padding: 0; border: 0; background: var(--preview-bg); color: var(--preview-ink); font-family: 'Inter',Arial,sans-serif; overflow-y: auto; overscroll-behavior: contain; margin: auto; }
+.company-preview::backdrop { background: #06152cc7; }
+.company-preview[data-design='precision'] { --preview-bg: #101d33; --preview-ink: #fff; --preview-blue: #dbb967; }
+.company-preview[data-design='corporate'] { --preview-blue: #173c76; }
+.company-preview[data-design='heritage'] { --preview-bg: #f6f5f1; --preview-ink: #142b46; --preview-blue: #142d4d; font-family: 'Source Sans 3',Arial,sans-serif; }
+.company-preview .preview-close { position: absolute; top: 12px; right: 12px; z-index: 2; width: 44px; height: 44px; border: 0; background: #fff; color: #142b46; font: 400 30px/1 Arial,sans-serif; cursor: pointer; }
+.company-preview .preview-image { width: 100%; height: 235px; object-fit: cover; }
+.company-preview .preview-copy { padding: 32px; }
+.company-preview .preview-discipline { color: var(--preview-blue); font-size: 13px; margin: 0 0 12px; }
+.company-preview h2 { margin: 0 0 22px; font-size: 35px; line-height: 1.15; font-weight: 550; letter-spacing: -.03em; }
+.company-preview[data-design='heritage'] h2 { font-family: 'Cormorant Garamond',Georgia,serif; font-size: 42px; }
+.company-preview .preview-copy > p:not(.preview-discipline) { margin: 0; font-size: 16px; line-height: 1.75; }
+.company-preview ul { display: flex; flex-wrap: wrap; gap: 10px 25px; padding-left: 18px; margin-block: 22px; font-size: 14px; }
+.company-preview .preview-enquiry { display: inline-flex; justify-content: space-between; align-items: center; gap: 25px; padding: 14px 18px; margin-top: 5px; background: var(--preview-blue); color: var(--preview-bg); font-size: 14px; font-weight: 600; text-decoration: none; }
+body:has(.company-preview[open]) { overflow: hidden; }
+@media (max-width: 800px) {
+  .site-shell { --strip-height: 76px; }
+  .site-shell .service-heading-box { left: 20px; }
+  .site-shell .service-name { font-size: 20px; }
+  .site-shell .service-group { padding-left: 0; }
+  .site-shell .service-group a { padding-inline: 22px; }
+}
+@media (max-width: 640px) {
+  .site-shell .service-heading-box { left: 16px; padding: 14px 18px; }
+  .previous-shell[data-design='precision'] .company-reveal { grid-column: 2 / -1; grid-row: 3; padding-right: 10px; }
+  .previous-shell[data-design='corporate'] .company-reveal { margin-inline: 12px; }
+  .company-preview .preview-copy { padding: 25px; }
+  .company-preview h2 { font-size: 28px; }
+  .company-preview .preview-image { height: 170px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .site-shell .is-enhanced .service-track { animation: none; transform: none; }
+  .site-shell .is-enhanced .service-group[aria-hidden='true'] { display: none; }
+  .site-shell .is-enhanced .service-viewport { overflow-x: auto; }
+}

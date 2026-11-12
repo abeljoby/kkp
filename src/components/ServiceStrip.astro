@@ -1,0 +1,17 @@
+---
+import { services } from '../data/services';
+interface Props { prefix?: string }
+const { prefix = '' } = Astro.props;
+---
+<section class="service-strip" aria-labelledby={`${prefix}service-heading`} data-service-strip>
+  <div class="service-viewport">
+    <div class="service-track">
+      {[false, true].map((duplicate) => <ul class="service-group" aria-hidden={duplicate ? 'true' : undefined}>
+        {services.map((service) => <li><a href={`#${prefix}${service.companyId}`} data-service-link tabindex={duplicate ? -1 : undefined}>
+          <span class="service-name">{service.title}</span>
+          <svg class="service-arrow" aria-hidden="true" viewBox="0 0 24 24" width="24" height="24" fill="none"><path d="M4 6h13v13m-5-5 5 5 5-5" stroke="currentColor" stroke-width="1.6" stroke-linecap="square" stroke-linejoin="miter" /></svg>
+        </a></li>)}
+      </ul>)}
+    </div>
+  </div>
+</section>

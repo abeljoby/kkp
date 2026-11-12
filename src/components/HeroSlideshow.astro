@@ -1,0 +1,17 @@
+---
+interface Props { class: string; imageClass?: string; first?: number }
+const { class: className, imageClass = 'hero-photo', first = 0 } = Astro.props;
+const scenes = [
+  { image: 'hbanner03.jpg', alt: 'Commercial building from the Beamco property archive' },
+  { image: 'hbanner01.jpg', alt: 'Building services across a Dubai rooftop, with the city skyline beyond' },
+  { image: 'hbanner04.jpg', alt: 'Detailed exterior of a residential property from the Beamco archive' },
+];
+const ordered = [...scenes.slice(first), ...scenes.slice(0, first)];
+const asset = (name: string) => `${import.meta.env.BASE_URL.replace(/\/$/, '')}/images/beamco/webimg/${name}`;
+---
+<div class={className} data-hero-slideshow>
+  {ordered.map((scene, index) => <img class:list={[imageClass, 'slideshow-photo', { 'is-active': index === 0 }]} src={asset(scene.image)} alt={scene.alt} width="1920" height="700" fetchpriority={index === 0 ? 'high' : 'auto'} loading={index === 0 ? 'eager' : 'lazy'} aria-hidden={index !== 0 ? 'true' : undefined} />)}
+</div>
+<script>
+  import '../scripts/hero-slideshow';
+</script>

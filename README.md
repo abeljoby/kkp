@@ -45,31 +45,53 @@ The floating **Explore designs** control offers exactly seven saved directions, 
 | 01 | Signature · Reference concepts | Restored from commit `9a84895`: photographic group overview and six-company grid |
 | 02 | Corporate · Reference concepts | Restored from `9a84895`: split-screen introduction and company profile cards |
 | 03 | Precision · Reference concepts | Restored from `9a84895`: dark editorial presentation and numbered company index |
-| 04 | Pastel Serif · Reference concepts | Modern's layout and architectural illustration, with a soft heritage palette and Cormorant Garamond headings |
+| 04 | Pastel Serif · Reference concepts | Modern's layout with archive photography, a soft heritage palette and Cormorant Garamond headings |
 | 05 | Signature · Requirement-led concepts | Royal blue and gold, requirement-led copy, interactive service explorer and company profiles |
 | 06 | Corporate · Requirement-led concepts | White and navy, requirement-led copy, interactive service explorer and company profiles |
 | 07 | Precision · Requirement-led concepts | Ink blue and gold, requirement-led copy, interactive service explorer and company profiles |
 
 Option 01 is the default. Selection persists under `kkp-design-v3` in browser `localStorage`; blocked storage does not prevent switching. The previous storage key is not reused because the review set has changed. The standalone Modern, Heritage and Editorial options have been replaced in the switcher by the requested combined option; their historical source remains in Git.
 
-The first three reference concepts are preserved in `src/components/OriginalHome.astro` and isolated in `src/styles/original.css` under `.previous-shell`. Their anchors have a `previous-` prefix, and their photo controls still work. Pastel Serif uses `src/components/LegacyHome.astro` and `src/styles/legacy.css`, with colors and fonts overlaid by `src/styles/hybrid.css`. It retains Modern's section geometry rather than adopting Heritage's split hero or centered layouts. Option 04 uses `hbanner01.jpg` in place of the architectural illustration. Supporting text is at least 2px larger across desktop and mobile, including navigation, buttons, descriptions, labels, captions and footer text; heading and company-title sizes are unchanged. Its company cards show full-color photos above solid white text panels, with three columns on desktop, two on tablet and one on mobile.
+The first three reference concepts are preserved in `src/components/OriginalHome.astro` and isolated in `src/styles/original.css` under `.previous-shell`. Their anchors have a `previous-` prefix, and the hero photos now advance automatically without selectors or captions. All seven concepts now share the service strip, interactive company expansion and company preview described below. Pastel Serif uses `src/components/LegacyHome.astro` and `src/styles/legacy.css`, with colors and fonts overlaid by `src/styles/hybrid.css`. It retains Modern's section geometry rather than adopting Heritage's split hero or centered layouts. Option 04 uses `hbanner01.jpg` in place of the architectural illustration. Supporting text is at least 2px larger across desktop and mobile, including navigation, buttons, descriptions, labels, captions and footer text; heading and company-title sizes are unchanged. Its company cards show full-color photos above solid white text panels, with three columns on desktop, two on tablet and one on mobile.
 
 The current three designs share the page in `src/pages/index.astro` and `.new-shell[data-design]` styles. Only one page is visible at a time; all page IDs are unique. Company identity and image mappings come from `src/data/group.ts`, while current editorial copy lives in `src/data/homepage.ts`. Changes to current copy do not rewrite the previous iterations.
 
 The previous and current Signature/Corporate/Precision designs retain Inter typography and the logo-derived blue, navy and gold palettes. The hybrid uses Heritage's `#142d4d` navy, `#d6a94c` gold and light neutral surfaces. Fonts load from Google Fonts with system fallbacks. The supplied logo is unchanged.
 
+### Scrolling service strip and company interactions
+
+All seven designs place **Find the service you need** in a box at the bottom of the hero, visually attached to the continuously moving row below. The heading box shares the strip’s background and text colors. The strip is 82px tall on desktop and 76px at tablet/mobile widths; it has no heading or pause/play button inside it. Service links use right-angled arrows that go right, then down. Each theme supplies its own colors and typography; Pastel Serif retains its larger supporting text and white company-card panels.
+
+| Service phrase | Destination company |
+| --- | --- |
+| Building services | Beam Electro-Mechanical Contracting |
+| Property building | Eminent Contracting |
+| Interior fit-out | FIS Interior Decoration |
+| Custom joinery | Beam Carpentry |
+| Building care | Superfine Services |
+| Office space | Mint Business Center |
+| Building systems maintenance | Beam Electro-Mechanical Contracting |
+| Property repairs | Eminent Contracting |
+
+These labels describe existing Beamco-derived scope. No additional capabilities have been introduced. `src/data/services.ts` is the single service-to-company mapping; `ServiceStrip.astro` renders it with page-specific anchor prefixes.
+
+- The row loops seamlessly and pauses on hover/focus, with no visible playback controls. Offscreen strips pause. Reduced-motion preferences disable autoplay and expose an ordinary manually scrollable row; keyboard navigation also uses the static row. Duplicate loop links are excluded from the accessibility tree and tab order.
+- A service click scrolls to, focuses and expands its company card. The selection stays expanded until dismissed or another company is selected. Hover and keyboard focus reveal the same content; tap/click pins or closes it. Escape closes an expanded card. All six companies have the interaction in all seven designs.
+- **View company** opens a themed, accessible in-page company preview with service information and an email enquiry link. This is the working prototype destination until dedicated company pages are built. It does not submit a form or send an enquiry automatically. The dialog supports Escape, a close button, focus containment and focus restoration.
+- `CompanyReveal.astro`, `CompanyPreview.astro`, `src/scripts/company-interactions.ts` and `src/styles/services.css` implement the shared behavior without changing the seven-way design selection.
+
 ### Content and information architecture
 
 The current revision keeps Signature, Corporate and Precision as visual directions but rebuilds their content around a prospective client's needs:
 
-1. **Opening statement:** “From the first build to the everyday.” A short explanation of the group leads into four requirement links, without the old statistics strip.
+1. **Opening statement:** “From the first build to the everyday.” A short explanation of the group leads into four requirement links, followed by the scrolling service strip.
 2. **Service explorer:** “What does your space need next?” Four native disclosure panels cover building, interiors, property care and workspace. Each explains the scope and links to the relevant businesses. Selecting a requirement updates the accompanying archive image.
 3. **Work in context:** “Some of the work you see. Some you rely on.” An asymmetrical photographic spread connects completed interiors with the mechanical work behind them. It is explicitly archive photography, not an invented case study.
-4. **Company directory:** “Get to know your specialist.” Six expandable profiles explain each business and provide a company-specific email enquiry. Links from the service explorer open the destination profile automatically; direct profile hashes also work.
+4. **Company directory:** “Get to know your specialist.” Six expandable profiles explain each business and open a company preview with an email enquiry link. Links from the service explorer open the destination profile automatically; direct profile hashes also work.
 5. **Group background:** A concise origin story and the chairman photograph provide context later in the page. There are no invented leadership quotes or new historical milestones.
 6. **Enquiry:** “What are you working on?” Practical guidance asks for the space, scope and location, alongside email, phone and office details. There is no submission form or backend.
 
-The generic values section, repeated service summaries, statistics strip, company-card wall and hero slideshow are absent from options 05–07; options 01–03 preserve their previous layouts and slideshow. Hero photography still uses the archived `hbanner03.jpg`; the six company image mappings, chairman photograph and mechanical project image remain. New copy restates existing service facts in a different narrative; it adds no claims about awards, scale, certifications or named project results.
+The generic values section, repeated service summaries, statistics strip and company-card wall are absent from options 05–07. Options 01–03 retain their photographic layouts, with the proof strip replaced by services and the cards enhanced with expandable profiles. All seven hero layouts now share an automatic slideshow of archived `hbanner03.jpg`, `hbanner01.jpg` and `hbanner04.jpg` images, advancing every six seconds with a crossfade and no selectors or captions. Pastel Serif begins with the rooftop image. Slideshows pause when their hero is offscreen, the browser tab is hidden, the hero is hovered/focused, or reduced motion is requested. Without JavaScript, the first image remains visible. The six company image mappings, chairman photograph and mechanical project image remain. New copy restates existing service facts in a different narrative; it adds no claims about awards, scale, certifications or named project results.
 
 The design chooser supports Escape, outside click, focus restoration and an announcement of the selected design. Mobile navigation remains available in all seven options. Service and company disclosures work with the keyboard and without JavaScript. JavaScript adds automatic profile opening from links and accompanying image changes. Transitions respect reduced-motion preferences.
 
@@ -78,7 +100,7 @@ The visual references are [Emrill](https://www.emrill.com/), [ServeU](https://se
 ## Validation of the redesign
 
 - `npm run build` passes with static output; editor diagnostics report no errors in the changed Astro, TypeScript or CSS files.
-- Production-browser checks cover all seven switcher choices, saved selection after refresh, mobile menu open/close, Escape and focus restoration, requirement links, company-profile opening, deep links, unique page IDs and runtime errors.
+- Production-browser checks cover all seven switcher choices, saved selection after refresh, mobile menu open/close, Escape and focus restoration, requirement links, company-profile opening, deep links, unique page IDs and runtime errors. Service-strip checks cover all eight mappings in all seven designs, both copies of the loop, pointer/keyboard activation, card expansion, preview focus restoration and reduced motion.
 - All seven options are checked at 390px; the new concepts are also checked for horizontal overflow at 320, 600, 768, 1024, 1440 and 1920px.
 - Automated axe checks for WCAG 2 A/AA and 2.1 AA found no violations in the three new concepts or open design chooser. This is an automated check, not a full accessibility audit of the legacy designs.
 - The chooser works when browser storage is blocked. With JavaScript disabled, the default previous Signature content and links remain visible.
@@ -149,6 +171,15 @@ src/
   styles/hybrid.css         Heritage color and typography overlay for option 04
   data/group.ts             Shared company identity and reference principles
   data/homepage.ts          New requirement-led copy and company profiles
+  data/services.ts          Shared service-to-company mapping
+  components/ServiceStrip.astro Scrolling service navigation
+  components/ServiceHeading.astro Hero-attached service label
+  components/HeroSlideshow.astro Shared automatic hero photography
+  scripts/hero-slideshow.ts  Visibility-aware six-second slideshow
+  components/CompanyReveal.astro Expanded card content
+  components/CompanyPreview.astro Shared company preview dialog
+  scripts/company-interactions.ts Strip, card and dialog behavior
+  styles/services.css       Shared interactions and theme treatments
 public/
   favicon.svg               Prototype KKP monogram favicon
   images/beamco/webimg/     Archived public Beamco source imagery (172 files)
