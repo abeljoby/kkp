@@ -92,11 +92,11 @@
 .previous-shell .value-row h3 { font-size: 23px; margin-bottom: 14px; }
 .previous-shell .value-row p { color: var(--muted); font-size: 15px; }
 .previous-shell .project-section { padding-block: 72px; background: var(--navy); color: #fff; border-top: 5px solid var(--gold); }
-.previous-shell .project-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+.previous-shell .project-layout { display: grid; grid-template-columns: .85fr 1.25fr; gap: 64px; align-items: center; }
 .previous-shell .project-content p { max-width: 530px; margin-top: 25px; color: #dbe3f0; }
 .previous-shell .button-light { margin-top: 30px; background: #fff; color: var(--navy); }
 .previous-shell .button-light:hover { background: var(--gold); }
-.previous-shell .project-visual { display: grid; grid-template-columns: 1.4fr 1fr; align-items: center; gap: 30px; }
+.previous-shell .project-visual { min-width: 0; }
 .previous-shell .project-visual figure { margin: 0; }
 .previous-shell .project-photo { width: 100%; height: auto; aspect-ratio: 1.1; object-fit: cover; }
 .previous-shell .project-visual figcaption { font-size: 12px; color: #c8d4e6; margin-top: 12px; line-height: 1.5; }
@@ -166,7 +166,7 @@
 .previous-shell[data-design='corporate'] .value-row { display: grid; grid-template-columns: 45px 1fr; padding-block: 25px; }
 .previous-shell[data-design='corporate'] .value-number { margin-top: 5px; }
 .previous-shell[data-design='corporate'] .project-section { background: var(--blue); }
-.previous-shell[data-design='corporate'] .project-layout { grid-template-columns: 1fr 1fr; }
+.previous-shell[data-design='corporate'] .project-layout { grid-template-columns: 1.25fr .85fr; }
 .previous-shell[data-design='corporate'] .project-visual { grid-row: 1; grid-column: 1; }
 .previous-shell[data-design='corporate'] .project-content { grid-column: 2; }
 
@@ -388,4 +388,11 @@
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
+}
+
+/* Give the environment imagery room before the desktop columns become narrow. */
+@media (max-width: 1100px) {
+  .previous-shell .project-layout, .previous-shell[data-design='corporate'] .project-layout { grid-template-columns: 1fr; gap: 40px; }
+  .previous-shell .project-content, .previous-shell[data-design='corporate'] .project-content { grid-column: 1; grid-row: 1; max-width: 680px; }
+  .previous-shell .project-visual, .previous-shell[data-design='corporate'] .project-visual { grid-column: 1; grid-row: 2; display: block; }
 }

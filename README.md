@@ -82,6 +82,14 @@ These labels describe existing Beamco-derived scope. No additional capabilities 
 - **Explore services** opens a themed, accessible in-page company preview with service information and an email enquiry link. This is the working prototype destination until dedicated company pages are built. It does not submit a form or send an enquiry automatically. The dialog supports Escape, a close button, focus containment and focus restoration.
 - `CompanyCard.astro`, `CompanyReveal.astro`, `CompanyPreview.astro`, `src/scripts/company-interactions.ts`, `src/styles/company-cards.css` and `src/styles/services.css` implement the shared behavior without changing the seven-way design selection.
 
+### Project environments carousel
+
+Options 01–04 replace the static image in **Services for projects and properties** with a shared vertical carousel. Commercial, Residential, Hospitality and Institutional each have a distinct 1440px-wide photograph and a matching selector. The next image slides upward every six seconds, with a 700ms transition; the four selector rails indicate progress. Selectors support click/tap, arrow keys and Home/End; a pause/play button controls autoplay. Keyboard focus on a selector, an offscreen carousel or a hidden browser tab pauses playback. Reduced motion disables autoplay and slide motion, retaining manual selection. Without JavaScript, the first image and its caption remain visible.
+
+`EnvironmentCarousel.astro`, `src/data/environments.ts` and `src/scripts/environment-carousel.ts` implement the carousel. Existing design-specific section colors and ordering remain; the layout stacks on smaller screens and uses a two-column selector grid on phones. Options 05–07 retain their separate work-study section.
+
+The four images in `public/images/environments/` are illustrative Unsplash environment photography, not claimed KKP projects. Source URLs and license details are recorded in `public/images/environments/SOURCES.md`.
+
 ### Content and information architecture
 
 The current revision keeps Signature, Corporate and Precision as visual directions but rebuilds their content around a prospective client's needs:
@@ -191,12 +199,16 @@ src/
   components/CompanyCard.astro Fixed-frame company card and sliding panel
   components/CompanyReveal.astro Company description and preview action
   styles/company-cards.css   Lift-reveal layouts and theme treatments
+  components/EnvironmentCarousel.astro Vertical environment image carousel
+  data/environments.ts      Four environment descriptions
+  scripts/environment-carousel.ts Timed slides, selection and playback
   components/CompanyPreview.astro Shared company preview dialog
   scripts/company-interactions.ts Strip, card and dialog behavior
   styles/services.css       Shared interactions and theme treatments
 public/
   favicon.svg               Prototype KKP monogram favicon
   images/beamco/webimg/     Archived public Beamco source imagery (172 files)
+  images/environments/     Illustrative environment photos and source credits
 ```
 
 See [Astro documentation](https://docs.astro.build/) for framework guidance.

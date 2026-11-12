@@ -1,0 +1,65 @@
+---
+import { environments } from '../data/environments';
+interface Props { prefix: string }
+const { prefix } = Astro.props;
+const asset = (name: string) => `${import.meta.env.BASE_URL}/images/environments/${name}.jpg`;
+---
+<div class="environment-carousel" data-environment-carousel role="region" aria-roledescription="carousel" aria-label="Environments we support">
+  <div class="environment-stage">
+    {environments.map((environment, index) => <figure class:list={['environment-slide', { 'is-active': index === 0 }]} data-environment-slide id={`${prefix}-environment-${environment.id}`} role="tabpanel" aria-labelledby={`${prefix}-environment-tab-${environment.id}`} aria-hidden={index !== 0 ? 'true' : undefined}>
+      <img src={asset(environment.id)} alt={environment.alt} width="1440" height={environment.id === 'commercial' ? '961' : '960'} loading="lazy" />
+      <figcaption><span>{environment.name}</span><h3>{environment.caption}</h3></figcaption>
+    </figure>)}
+    <button class="environment-playback" type="button" data-environment-playback aria-label="Pause environment slideshow" hidden>Pause</button>
+  </div>
+  <div class="environment-options" role="tablist" aria-label="Choose an environment" aria-orientation="vertical">
+    {environments.map((environment, index) => <button class="environment-option" type="button" role="tab" id={`${prefix}-environment-tab-${environment.id}`} aria-controls={`${prefix}-environment-${environment.id}`} aria-selected={index === 0 ? 'true' : 'false'} tabindex={index === 0 ? 0 : -1} data-environment-choice={index} disabled><span class="environment-progress" aria-hidden="true"></span><span class="environment-name">{environment.name}</span><span class="environment-detail">{environment.detail}</span></button>)}
+  </div>
+  <span class="environment-status" aria-live="polite" aria-atomic="true"></span>
+</div>
+<script>
+  import '../scripts/environment-carousel';
+</script>
+
+<style>
+  .environment-carousel { display: grid; grid-template-columns: minmax(0, 1fr) 170px; gap: 24px; min-width: 0; color: #fff; }
+  .environment-stage { position: relative; height: 440px; overflow: hidden; isolation: isolate; background: #102b50; }
+  .environment-slide { position: absolute; inset: 0; margin: 0; transform: translateY(100%); visibility: hidden; }
+  .environment-slide.is-active { transform: translateY(0); visibility: visible; z-index: 1; }
+  .environment-carousel.is-enhanced .environment-slide { transition: transform .7s cubic-bezier(.22,1,.36,1); }
+  .environment-slide.is-exiting { transform: translateY(-100%); visibility: visible; z-index: 1; }
+  .environment-slide img { display: block; width: 100%; height: 100%; object-fit: cover; }
+  .environment-slide::after { content: ''; position: absolute; inset: 35% 0 0; background: linear-gradient(transparent, #07172ce8); }
+  .environment-slide figcaption { position: absolute; z-index: 2; inset: auto 28px 30px; }
+  .environment-slide figcaption > span { display: block; margin-bottom: 10px; font: 500 11px/1.4 'Inter',Arial,sans-serif; letter-spacing: .12em; text-transform: uppercase; color: #e7edf5; }
+  .environment-slide h3 { margin: 0; max-width: 14ch; font-size: clamp(26px,2.3vw,34px); line-height: 1.12; letter-spacing: -.035em; font-weight: 500; color: #fff; }
+  .environment-playback { position: absolute; top: 18px; right: 18px; z-index: 3; padding: 9px 13px; border: 1px solid #ffffff70; background: #07172c80; color: #fff; backdrop-filter: blur(10px); font: 500 12px/1.2 'Inter',Arial,sans-serif; cursor: pointer; }
+  .environment-playback[hidden] { display: none; }
+  .environment-playback:hover { background: #07172cc0; }
+  .environment-options { display: flex; flex-direction: column; justify-content: center; min-width: 0; }
+  .environment-option { position: relative; display: flex; flex-direction: column; align-items: start; gap: 8px; padding: 22px 0 22px 19px; border: 0; background: transparent; color: inherit; text-align: left; cursor: pointer; opacity: .72; transition: opacity .25s; }
+  .environment-option[aria-selected='true'], .environment-option:hover { opacity: 1; }
+  .environment-name { font-size: 18px; line-height: 1.25; font-weight: 550; letter-spacing: -.02em; }
+  .environment-detail { max-width: 18ch; font-size: 12px; line-height: 1.5; font-weight: 400; color: #e1e8f2; }
+  .environment-progress { position: absolute; inset: 0 auto 0 0; width: 2px; overflow: hidden; background: #ffffff25; }
+  .environment-progress::after { content: ''; position: absolute; inset: 0; background: #fff; transform: scaleY(0); transform-origin: top; }
+  .environment-option[aria-selected='true'] .environment-progress::after { transform: scaleY(1); }
+  .is-playing .environment-option[aria-selected='true'] .environment-progress::after { animation: environment-fill 6s linear both; }
+  .environment-option:focus-visible, .environment-playback:focus-visible { outline: 2px solid #fff; outline-offset: 4px; }
+  .environment-status { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+  @keyframes environment-fill { from { transform: scaleY(0); } to { transform: scaleY(1); } }
+  @media (max-width: 1100px) { .environment-carousel { grid-template-columns: minmax(0, 1fr) 210px; } }
+  @media (max-width: 600px) {
+    .environment-carousel { grid-template-columns: 1fr; gap: 20px; }
+    .environment-stage { height: 330px; }
+    .environment-slide figcaption { inset: auto 24px 24px; }
+    .environment-options { display: grid; grid-template-columns: 1fr 1fr; gap: 14px 18px; }
+    .environment-option { padding: 10px 0 10px 14px; gap: 6px; }
+    .environment-name { font-size: 16px; }
+    .environment-detail { font-size: 11px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .environment-carousel.is-enhanced .environment-slide, .environment-option { transition: none !important; }
+    .is-playing .environment-option .environment-progress::after { animation: none; }
+  }
+</style>

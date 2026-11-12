@@ -7,6 +7,7 @@ import ServiceStrip from "./ServiceStrip.astro";
 import ServiceHeading from "./ServiceHeading.astro";
 import HeroSlideshow from "./HeroSlideshow.astro";
 import CompanyCard from "./CompanyCard.astro";
+import EnvironmentCarousel from "./EnvironmentCarousel.astro";
 const asset = (path: string) => `${import.meta.env.BASE_URL}/${path.replace(/^\//, '')}`;
 ---
   <div class="site-shell previous-shell" data-design="signature">
@@ -44,7 +45,7 @@ const asset = (path: string) => `${import.meta.env.BASE_URL}/${path.replace(/^\/
 
       <section class="values-section section"><div class="wrap values-layout"><div class="values-title"><h2>How we work <br /><span>with clients.</span></h2><p>We combine specialist knowledge with the coordination needed for complex projects and occupied properties.</p></div><div class="values-list">{values.map((value) => <article class="value-row"><span class="value-number">{value.n}</span><div><h3>{value.title}</h3><p>{value.text}</p></div></article>)}</div></div></section>
 
-      <section class="project-section" id="previous-projects"><div class="wrap project-layout"><div class="project-content"><h2>Services for projects <br />and properties.</h2><p>We support commercial, residential, hospitality and institutional environments with complementary services from construction delivery through to ongoing operations.</p><a class="button button-light" href="#previous-contact">Discuss your requirements <LinkArrow /></a></div><div class="project-visual"><figure><img class="project-photo" src={asset('/images/beamco/webimg/projects-list-beamelectro01.jpg')} alt="Mechanical engineering installation" width="360" height="276" loading="lazy" /><figcaption>Beam Electro-Mechanical</figcaption></figure><ul class="sector-list" aria-label="Environments we support"><li>Commercial</li><li>Residential</li><li>Hospitality</li><li>Institutional</li></ul></div></div></section>
+      <section class="project-section" id="previous-projects"><div class="wrap project-layout"><div class="project-content"><h2>Services for projects <br />and properties.</h2><p>We support commercial, residential, hospitality and institutional environments with complementary services from construction delivery through to ongoing operations.</p><a class="button button-light" href="#previous-contact">Discuss your requirements <LinkArrow /></a></div><div class="project-visual"><EnvironmentCarousel prefix="previous" /></div></div></section>
 
       <section class="contact-section section" id="previous-contact"><div class="wrap contact-layout"><div><h2>Contact us.</h2><p>For business enquiries or to discuss your project requirements, contact our team.</p></div><div class="contact-details"><a class="contact-email" href="mailto:beamco@beamcointl.com">beamco@beamcointl.com</a><div class="contact-meta"><div><span>Call us</span><a href="tel:+97144226185">+971 4 422 6185</a></div><div><span>Office</span><p>XL Tower, Business Bay <br />Dubai, United Arab Emirates</p></div></div></div></div></section>
     </main>
