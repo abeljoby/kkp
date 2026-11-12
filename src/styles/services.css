@@ -46,7 +46,7 @@
 .site-shell .service-track:has(a:focus-visible) .service-group[aria-hidden='true'] { display: none; }
 @keyframes service-scroll { to { transform: translateX(-50%); } }
 
-.previous-shell[data-design='corporate'] { --strip-background: var(--navy); --strip-ink: var(--gold); --strip-line: #ffffff35; }
+.previous-shell[data-design='corporate'] { --strip-background: var(--paper); --strip-ink: var(--blue); --strip-line: var(--line); }
 .previous-shell[data-design='precision'] { --strip-background: var(--navy); --strip-ink: var(--gold); --strip-line: #ffffff35; }
 .new-shell[data-design='signature'] { --strip-background: var(--navy); --strip-ink: var(--gold); --strip-line: #ffffff35; }
 .new-shell[data-design='corporate'] { --strip-background: var(--paper); --strip-ink: var(--blue); }

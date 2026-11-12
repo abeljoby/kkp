@@ -121,7 +121,9 @@
 
 /* 02 — Corporate: white-led split composition, image-led cards, vertical principles. */
 .previous-shell[data-design='corporate'] { --blue: #173c76; --navy: #102b50; --gold: #d2ac55; }
-.previous-shell[data-design='corporate'] .utility-bar { background: #f1f3f6; color: #42506a; border-bottom: 1px solid var(--line); }
+.previous-shell[data-design='corporate'] .utility-bar { background: var(--navy); color: #dbe3f1; border-bottom: 1px solid var(--navy); }
+.previous-shell[data-design='corporate'] .site-header { background: var(--paper); color: var(--navy); border-bottom: 1px solid #cfd6df; }
+.previous-shell[data-design='corporate'] .main-nav { background: var(--paper); }
 .previous-shell[data-design='corporate'] .hero { color: var(--ink); background: #fff; min-height: 650px; border-bottom: 1px solid var(--line); }
 .previous-shell[data-design='corporate'] .hero-media { inset: 24px 0 32px 54%; }
 .previous-shell[data-design='corporate'] .hero-photo { object-position: 60% center; }

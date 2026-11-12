@@ -56,6 +56,8 @@ The first three reference concepts are preserved in `src/components/OriginalHome
 
 The current three designs share the page in `src/pages/index.astro` and `.new-shell[data-design]` styles. Only one page is visible at a time; all page IDs are unique. Company identity and image mappings come from `src/data/group.ts`, while current editorial copy lives in `src/data/homepage.ts`. Changes to current copy do not rewrite the previous iterations.
 
+Option 02 uses a navy top contact bar with light text, followed by the same light grey navigation background as its chairman section (`--paper`, `#f3f5f7`) and a fine divider to separate the header from its white split hero; the mobile navigation matches the header. Its service carousel and attached heading use the same light grey with the Corporate blue used by its links and buttons, plus neutral dividers.
+
 The previous and current Signature/Corporate/Precision designs retain Inter typography and the logo-derived blue, navy and gold palettes. The hybrid uses Heritage's `#142d4d` navy, `#d6a94c` gold and light neutral surfaces. Fonts load from Google Fonts with system fallbacks. The supplied logo is unchanged.
 
 ### Scrolling service strip and company interactions
