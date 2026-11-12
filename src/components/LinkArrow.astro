@@ -1,0 +1,11 @@
+---
+interface Props { external?: boolean; class?: string }
+const { external = false, class: className } = Astro.props;
+---
+<svg class:list={['link-arrow', className]} aria-hidden="true" focusable="false" viewBox="0 0 24 24" width="16" height="16" fill="none">
+  <path d={external ? 'M6 18 18 6M6 6h12v12' : 'M4 12h16m-6-6 6 6-6 6'} stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+</svg>
+
+<style>
+  .link-arrow { display: inline-block; width: 16px; height: 16px; flex: 0 0 16px; align-self: center; vertical-align: middle; }
+</style>

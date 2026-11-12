@@ -1,4 +1,5 @@
 ---
+import LinkArrow from '../components/LinkArrow.astro';
 import Layout from '../layouts/Layout.astro';
 import ServiceStrip from '../components/ServiceStrip.astro';
 import ServiceHeading from '../components/ServiceHeading.astro';
@@ -7,14 +8,15 @@ import CompanyPreview from '../components/CompanyPreview.astro';
 import LegacyHome from '../components/LegacyHome.astro';
 import OriginalHome from '../components/OriginalHome.astro';
 import { directory, needs } from '../data/homepage';
+import { chairmanMessage } from '../data/group';
 
 const asset = (path: string) => `${import.meta.env.BASE_URL}/${path.replace(/^\//, '')}`;
 
 const designGroups = [
   { label: 'Reference concepts', options: [
-    { id: 'previous-signature', number: '01', name: 'Signature', detail: 'Photographic group overview · six-company grid', color: '#123d8d' },
-    { id: 'previous-corporate', number: '02', name: 'Corporate', detail: 'Split-screen introduction · company profile cards', color: '#f1f3f6' },
-    { id: 'previous-precision', number: '03', name: 'Precision', detail: 'Dark editorial presentation · numbered company index', color: '#101d33' },
+    { id: 'previous-signature', number: '01', name: 'Signature', detail: 'Photographic overview · expertise cards', color: '#123d8d' },
+    { id: 'previous-corporate', number: '02', name: 'Corporate', detail: 'Split-screen introduction · expertise cards', color: '#f1f3f6' },
+    { id: 'previous-precision', number: '03', name: 'Precision', detail: 'Dark editorial presentation · specialist profiles', color: '#101d33' },
     { id: 'modern-heritage', number: '04', name: 'Pastel Serif', detail: 'Cormorant Garamond headings · soft heritage palette', color: '#e8edf1' },
   ] },
   { label: 'Requirement-led concepts', options: [
@@ -28,20 +30,20 @@ const designGroups = [
 <Layout>
   <div class="site-shell new-shell" data-design="signature" hidden>
     <a class="skip-link" href="#main-content">Skip to content</a>
-    <div class="utility-bar"><div class="wrap utility-inner"><span>Dubai, United Arab Emirates</span><div class="utility-links"><a href="tel:+97144226185">+971 4 422 6185</a><a href="mailto:beamco@beamcointl.com">beamco@beamcointl.com</a></div></div></div>
+    <div class="utility-bar"><div class="wrap utility-inner"><span>Expertise for every stage</span><div class="utility-links"><a href="tel:+97144226185">+971 4 422 6185</a><a href="mailto:beamco@beamcointl.com">beamco@beamcointl.com</a></div></div></div>
     <header class="site-header" id="top"><div class="wrap header-inner">
       <a class="brand" href="#top" aria-label="KKP Group home"><img class="brand-logo" src={asset('/images/brand/kkp-group-logo.png')} width="76" height="76" alt="KKP Group" /><span class="brand-wordmark" aria-hidden="true">KKP GROUP<small>Since 1980</small></span></a>
-      <nav class="main-nav" id="main-navigation" aria-label="Main navigation"><a href="#expertise">Expertise</a><a href="#work">Our work</a><a href="#companies">The group</a><a href="#contact">Contact</a></nav>
-      <a class="header-cta" href="#contact">Get in touch <span aria-hidden="true">↗</span></a>
+      <nav class="main-nav" id="main-navigation" aria-label="Main navigation"><a href="#expertise">Expertise</a><a href="#work">Our work</a><a href="#companies">Specialists</a><a href="#contact">Contact</a></nav>
+      <a class="header-cta" href="#contact">Get in touch</a>
       <button class="menu-toggle" type="button" aria-label="Open navigation" aria-expanded="false" aria-controls="main-navigation"><span></span><span></span></button>
     </div></header>
     <main id="main-content">
       <section class="opening" aria-labelledby="opening-title">
         <div class="wrap opening-grid">
           <h1 id="opening-title">From the first build <span>to the everyday.</span></h1>
-          <div class="opening-intro"><p>A building becomes a workplace, a home, a place people depend on. KKP Group brings together the businesses that build, fit out and care for those spaces across the UAE.</p><a class="text-link" href="#expertise">Find the expertise you need <span aria-hidden="true">↓</span></a></div>
+          <div class="opening-intro"><p>A building becomes a workplace, a home, a place people depend on. KKP Group provides construction, fit-out and property care.</p><a class="text-link" href="#expertise">Find the expertise you need <LinkArrow /></a></div>
           <HeroSlideshow class="opening-image" />
-          <nav class="need-shortcuts" aria-label="Explore by requirement">{needs.map((need) => <a href={`#${need.id}`}><span>{need.short}</span><span aria-hidden="true">↗</span></a>)}</nav>
+          <nav class="need-shortcuts" aria-label="Explore by requirement">{needs.map((need) => <a href={`#${need.id}`}><span>{need.short}</span><LinkArrow /></a>)}</nav>
         </div>
         <ServiceHeading />
       </section>
@@ -49,42 +51,42 @@ const designGroups = [
       <ServiceStrip />
 
       <section class="expertise section" id="expertise" aria-labelledby="expertise-title"><div class="wrap">
-        <div class="section-heading"><h2 id="expertise-title">What does your <br />space need next?</h2><p>A new project and an occupied building call for different skills. Start with your requirement and meet the businesses that can help.</p></div>
+        <div class="section-heading"><h2 id="expertise-title">What does your <br />space need next?</h2><p>A new project and an occupied building call for different skills. Start with your requirement and explore the expertise to match.</p></div>
         <div class="expertise-layout">
           <div class="need-list">{needs.map((need, index) => <details class="need-detail" id={need.id} name="requirements" open={index === 0}>
             <summary><h3>{need.title}</h3><span class="detail-symbol" aria-hidden="true"></span></summary>
-            <div class="need-body"><p>{need.description}</p><ul class="scope-list" aria-label="Services">{need.scope.map((scope) => <li>{scope}</li>)}</ul><div class="specialist-links">{need.companyIds.map((id) => { const company = directory.find((item) => item.id === id)!; return <a href={`#${id}`}>{company.name}<span aria-hidden="true">↗</span></a>; })}</div></div>
+            <div class="need-body"><p>{need.description}</p><ul class="scope-list" aria-label="Services">{need.scope.map((scope) => <li>{scope}</li>)}</ul><div class="specialist-links">{need.companyIds.map((id) => { const company = directory.find((item) => item.id === id)!; return <a href={`#${id}`}>{company.name}<LinkArrow /></a>; })}</div></div>
           </details>)}</div>
           <div class="need-visuals">{needs.map((need, index) => <figure class="need-visual" data-need-image={need.id} hidden={index !== 0}><img src={asset(need.image)} alt={need.alt} width="1920" height="552" loading="lazy" /><figcaption>{need.short}<span>KKP Group</span></figcaption></figure>)}</div>
         </div>
       </div></section>
 
       <section class="work-study" id="work" aria-labelledby="work-title"><div class="wrap work-grid">
-        <div class="work-intro"><h2 id="work-title">Some of the work <br />you see. <br /><span>Some you rely on.</span></h2><p>A finished interior is only part of a building’s story. Behind it are the systems, materials and maintenance that make the space usable.</p><a class="text-link" href="#companies">Meet the businesses behind it <span aria-hidden="true">↓</span></a></div>
+        <div class="work-intro"><h2 id="work-title">Some of the work <br />you see. <br /><span>Some you rely on.</span></h2><p>A finished interior is only part of a building’s story. Behind it are the systems, materials and maintenance that make the space usable.</p><a class="text-link" href="#companies">Explore the expertise behind it <LinkArrow /></a></div>
         <figure class="work-finish"><img src={asset('/images/beamco/webimg/innerbanner05.jpg')} alt="Interior seating and decorative timber screens" width="1920" height="552" loading="lazy" /><figcaption><strong>The finished space</strong><span>Interior fit-out &amp; decoration</span></figcaption></figure>
         <figure class="work-engineering"><img src={asset('/images/beamco/webimg/projects-list-beamelectro01.jpg')} alt="Pipework and mechanical equipment in a Beam Electro-Mechanical project" width="360" height="276" loading="lazy" /><figcaption><strong>Behind the scenes</strong><span>Mechanical building services</span></figcaption></figure>
-        <p class="work-note">Photography from the Beamco archive. Shown to illustrate the group’s areas of work.</p>
+
       </div></section>
 
       <section class="directory-section section" id="companies" aria-labelledby="directory-title"><div class="wrap directory-layout">
-        <div class="directory-intro"><h2 id="directory-title">Get to know <br />your specialist.</h2><p>Six businesses, each with a defined focus. Explore the group and choose a starting point for your enquiry.</p><a class="text-link" href="#contact">Not sure where to start? <span aria-hidden="true">↓</span></a></div>
+        <div class="directory-intro"><h2 id="directory-title">Get to know <br />your specialist.</h2><p>From engineering and construction to interiors, property care and workspace, explore the expertise for your next project.</p><a class="text-link" href="#contact">Not sure where to start? <LinkArrow /></a></div>
         <div class="company-directory">{directory.map((company) => <details class="directory-entry interactive-company" id={company.id} data-company-id={company.id}>
           <summary data-company-toggle><span class="directory-number">{company.number}</span><div><h3>{company.name}</h3><span class="directory-discipline">{company.discipline}</span></div><span class="detail-symbol" aria-hidden="true"></span></summary>
-          <div class="directory-body"><img src={asset(company.image)} alt="" width="1920" height="552" loading="lazy" /><div><p>{company.description}</p><button class="company-view" type="button" data-view-company={company.id}>View company <span aria-hidden="true">↗</span></button></div></div>
+          <div class="directory-body"><img src={asset(company.image)} alt="" width="1920" height="552" loading="lazy" /><div><p>{company.description}</p><button class="company-view" type="button" data-view-company={company.id}>Explore services <LinkArrow /></button></div></div>
         </details>)}</div>
       </div></section>
 
       <section class="group-note" id="group" aria-labelledby="group-title"><div class="wrap group-note-grid">
         <figure class="chairman-portrait"><img src={asset('/images/beamco/webimg/chairman.jpg')} alt="K. K. Peethambaran at his office" width="767" height="511" loading="lazy" /><figcaption><strong>K. K. Peethambaran</strong><span>Chairman &amp; Managing Director</span></figcaption></figure>
-        <div class="group-note-copy"><h2 id="group-title">A Dubai beginning. <br />A broader purpose.</h2><p>Our story began as Beamco Group in 1980, in construction and maintenance. The portfolio grew to include interiors, carpentry, facilities services and business space.</p><p>KKP Group brings these specialist businesses together under a shared group identity, with roots in the UAE’s built environment.</p><a class="text-link" href="https://beamcointl.com/chairman.php" target="_blank" rel="noreferrer">A message from our chairman <span aria-hidden="true">↗</span></a></div>
+        <div class="group-note-copy"><h2 id="group-title">{chairmanMessage.title}</h2>{chairmanMessage.paragraphs.map((paragraph) => <p>{paragraph}</p>)}</div>
       </div></section>
 
       <section class="enquiry-section section" id="contact" aria-labelledby="enquiry-title"><div class="wrap">
-        <div class="enquiry-heading"><h2 id="enquiry-title">What are you <span>working on?</span></h2><div><p>Tell us about the space, the work you have in mind and where it is. If you know which company you need, include its name in your enquiry.</p><a class="button button-primary" href="mailto:beamco@beamcointl.com?subject=Enquiry%20for%20KKP%20Group">Start a conversation <span aria-hidden="true">↗</span></a></div></div>
-        <div class="contact-routes"><a href="mailto:beamco@beamcointl.com"><span>Email the group</span><strong>beamco@beamcointl.com</strong><span aria-hidden="true">↗</span></a><a href="tel:+97144226185"><span>Speak to us</span><strong>+971 4 422 6185</strong><span aria-hidden="true">↗</span></a><div><span>Find us in Dubai</span><p>XL Tower, Business Bay<br />United Arab Emirates</p></div></div>
+        <div class="enquiry-heading"><h2 id="enquiry-title">What are you <span>working on?</span></h2><div><p>Tell us about the space, the work you have in mind and where it is. Include the services you need and any project details.</p><a class="button button-primary" href="mailto:beamco@beamcointl.com?subject=Enquiry%20for%20KKP%20Group">Start a conversation <LinkArrow /></a></div></div>
+        <div class="contact-routes"><a href="mailto:beamco@beamcointl.com"><span>Email the group</span><strong>beamco@beamcointl.com</strong></a><a href="tel:+97144226185"><span>Speak to us</span><strong>+971 4 422 6185</strong></a><div><span>Office address</span><p>XL Tower, Business Bay<br />United Arab Emirates</p></div></div>
       </div></section>
     </main>
-    <footer class="site-footer"><div class="wrap footer-main"><a class="brand" href="#top" aria-label="KKP Group home"><img class="brand-logo" src={asset('/images/brand/kkp-group-logo.png')} width="76" height="76" loading="lazy" alt="KKP Group" /><span class="brand-wordmark" aria-hidden="true">KKP GROUP<small>Since 1980</small></span></a><div class="footer-links"><a href="#expertise">Find your expertise</a><a href="#companies">Explore the group</a><a href="#group">Our background</a><a href="#contact">Make an enquiry</a></div></div><div class="wrap footer-bottom"><span>© 2026 KKP Group</span><span>Design review · Group history, portfolio and contact details subject to client confirmation.</span></div></footer>
+    <footer class="site-footer"><div class="wrap footer-main"><a class="brand" href="#top" aria-label="KKP Group home"><img class="brand-logo" src={asset('/images/brand/kkp-group-logo.png')} width="76" height="76" loading="lazy" alt="KKP Group" /><span class="brand-wordmark" aria-hidden="true">KKP GROUP<small>Since 1980</small></span></a><div class="footer-links"><a href="#expertise">Find your expertise</a><a href="#companies">Explore our expertise</a><a href="#group">Our background</a><a href="#contact">Make an enquiry</a></div></div><div class="wrap footer-bottom"><span>© 2026 KKP Group</span></div></footer>
   </div>
   <OriginalHome />
   <LegacyHome />

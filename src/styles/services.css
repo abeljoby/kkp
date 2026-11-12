@@ -34,7 +34,7 @@
 .site-shell .service-group li { flex: 0 0 auto; margin: 0; }
 .site-shell .service-group a { display: flex; align-items: center; gap: 30px; white-space: nowrap; color: inherit; text-decoration: none; padding: 15px 34px; border-right: 1px solid var(--strip-line); min-height: 52px; }
 .site-shell .service-name { font: 500 22px/1.25 'Inter', Arial, sans-serif; letter-spacing: -.025em; }
-.site-shell .service-arrow { display: block; flex: 0 0 24px; color: currentColor; opacity: .8; }
+.site-shell .service-arrow { display: block; flex: 0 0 16px; color: currentColor; opacity: .8; }
 .site-shell .service-group a:hover { text-decoration: underline; text-underline-offset: 6px; }
 .site-shell .service-group a:focus-visible { outline: 2px solid currentColor; outline-offset: -4px; }
 .site-shell .is-enhanced .service-viewport { overflow-x: hidden; }

@@ -1,9 +1,10 @@
 ---
+import LinkArrow from './LinkArrow.astro';
 import type { directory } from '../data/homepage';
 interface Props { company: (typeof directory)[number]; id: string }
 const { company, id } = Astro.props;
 ---
 <div class="company-reveal" id={id} hidden>
   <p>{company.description}</p>
-  <button class="company-view" type="button" data-view-company={company.id}>View company <span aria-hidden="true">↗</span></button>
+  <button class="company-view" type="button" data-view-company={company.id}>Explore services <LinkArrow /></button>
 </div>

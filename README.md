@@ -60,7 +60,7 @@ The previous and current Signature/Corporate/Precision designs retain Inter typo
 
 ### Scrolling service strip and company interactions
 
-All seven designs place **Find the service you need** in a box at the bottom of the hero, visually attached to the continuously moving row below. The heading box shares the strip’s background and text colors. The strip is 82px tall on desktop and 76px at tablet/mobile widths; it has no heading or pause/play button inside it. Service links use right-angled arrows that go right, then down. Each theme supplies its own colors and typography; Pastel Serif retains its larger supporting text and white company-card panels.
+All seven designs place **Find the service you need** in a box at the bottom of the hero, visually attached to the continuously moving row below. The heading box shares the strip’s background and text colors. The strip is 82px tall on desktop and 76px at tablet/mobile widths; it has no heading or pause/play button inside it. Links and actions across all seven designs use a shared, understated 16px stroke arrow pointing right. Diagonal arrows are reserved for external web pages; utility/contact links and non-interactive value rows omit arrows. Each theme supplies its own colors and typography; Pastel Serif retains its larger supporting text and white company-card panels.
 
 | Service phrase | Destination company |
 | --- | --- |
@@ -77,7 +77,7 @@ These labels describe existing Beamco-derived scope. No additional capabilities 
 
 - The row loops seamlessly and pauses on hover/focus, with no visible playback controls. Offscreen strips pause. Reduced-motion preferences disable autoplay and expose an ordinary manually scrollable row; keyboard navigation also uses the static row. Duplicate loop links are excluded from the accessibility tree and tab order.
 - A service click scrolls to, focuses and expands its company card. The selection stays expanded until dismissed or another company is selected. Hover and keyboard focus reveal the same content; tap/click pins or closes it. Escape closes an expanded card. All six companies have the interaction in all seven designs.
-- **View company** opens a themed, accessible in-page company preview with service information and an email enquiry link. This is the working prototype destination until dedicated company pages are built. It does not submit a form or send an enquiry automatically. The dialog supports Escape, a close button, focus containment and focus restoration.
+- **Explore services** opens a themed, accessible in-page company preview with service information and an email enquiry link. This is the working prototype destination until dedicated company pages are built. It does not submit a form or send an enquiry automatically. The dialog supports Escape, a close button, focus containment and focus restoration.
 - `CompanyReveal.astro`, `CompanyPreview.astro`, `src/scripts/company-interactions.ts` and `src/styles/services.css` implement the shared behavior without changing the seven-way design selection.
 
 ### Content and information architecture
@@ -86,9 +86,9 @@ The current revision keeps Signature, Corporate and Precision as visual directio
 
 1. **Opening statement:** “From the first build to the everyday.” A short explanation of the group leads into four requirement links, followed by the scrolling service strip.
 2. **Service explorer:** “What does your space need next?” Four native disclosure panels cover building, interiors, property care and workspace. Each explains the scope and links to the relevant businesses. Selecting a requirement updates the accompanying archive image.
-3. **Work in context:** “Some of the work you see. Some you rely on.” An asymmetrical photographic spread connects completed interiors with the mechanical work behind them. It is explicitly archive photography, not an invented case study.
+3. **Work in context:** “Some of the work you see. Some you rely on.” An asymmetrical photographic spread connects completed interiors with the mechanical work behind them. The images come from the Beamco archive and do not represent a newly documented case study.
 4. **Company directory:** “Get to know your specialist.” Six expandable profiles explain each business and open a company preview with an email enquiry link. Links from the service explorer open the destination profile automatically; direct profile hashes also work.
-5. **Group background:** A concise origin story and the chairman photograph provide context later in the page. There are no invented leadership quotes or new historical milestones.
+5. **Chairman’s message:** All seven designs show the same message adapted from the text supplied for this section, alongside the chairman photograph. It retains the 1980 Boeing Electro-Engineering and Maintenance origin, the progression from maintenance to MEP works and the commitment to investing in equipment, technology and technical expertise. Options 01–03 pair the portrait with a compact “Built on experience — Since 1980” note rather than an oversized year. Shared copy is in `src/data/group.ts`; it remains subject to the content-review requirements below.
 6. **Enquiry:** “What are you working on?” Practical guidance asks for the space, scope and location, alongside email, phone and office details. There is no submission form or backend.
 
 The generic values section, repeated service summaries, statistics strip and company-card wall are absent from options 05–07. Options 01–03 retain their photographic layouts, with the proof strip replaced by services and the cards enhanced with expandable profiles. All seven hero layouts now share an automatic slideshow of archived `hbanner03.jpg`, `hbanner01.jpg` and `hbanner04.jpg` images, advancing every six seconds with a crossfade and no selectors or captions. Pastel Serif begins with the rooftop image. Slideshows pause when their hero is offscreen, the browser tab is hidden, the hero is hovered/focused, or reduced motion is requested. Without JavaScript, the first image remains visible. The six company image mappings, chairman photograph and mechanical project image remain. New copy restates existing service facts in a different narrative; it adds no claims about awards, scale, certifications or named project results.
@@ -132,6 +132,14 @@ Electro-Mechanical project photograph. These assets are shown with captions or
 alt text and remain subject to client approval for the KKP Group site.
 
 ## Page content and open decisions
+
+Marketing copy, header labels and metadata avoid geographic limits such as “across the UAE” and “based in Dubai”. Location descriptions in narrative and image alt text are generalized, and the chairman’s message summarizes the progression from maintenance to MEP works rather than listing location-specific client references. Specific locations remain in the office addresses; no wider geographic footprint is claimed.
+
+The claim that operations began in 1980 as Beamco Group was identified as incorrect and removed from page copy. The chairman’s supplied message identifies the original venture as Boeing Electro-Engineering and Maintenance.
+
+Public copy uses service- and expertise-led language in navigation, headings, enquiry guidance and profile actions, avoiding generic references such as “our companies” or “the relevant company”. The individual business names and internal routing/data identifiers remain unchanged.
+
+Public-facing archive disclaimers, client-confirmation notes and prototype labels have been removed from the seven page designs. Source provenance and provisional-content review requirements remain documented here; this presentation change does not imply client approval. The design chooser remains available for stakeholder review.
 
 The new homepage and seven-way design switcher are in `src/pages/index.astro`; new page styles are in `src/styles/global.css`; preserved reference markup/styles are in `src/components/LegacyHome.astro` and `src/styles/legacy.css`; shared company identity data and reference principles are in `src/data/group.ts`, with new editorial copy in `src/data/homepage.ts`. Document metadata and the shared layout are in `src/layouts/Layout.astro`.
 

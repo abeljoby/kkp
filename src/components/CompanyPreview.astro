@@ -1,10 +1,11 @@
 ---
+import LinkArrow from './LinkArrow.astro';
 import { directory } from '../data/homepage';
 import { services } from '../data/services';
 const asset = (path: string) => `${import.meta.env.BASE_URL.replace(/\/$/, '')}/${path.replace(/^\//, '')}`;
 ---
 <dialog class="company-preview" aria-labelledby="company-preview-title">
-  <button class="preview-close" type="button" aria-label="Close company preview" autofocus>×</button>
+  <button class="preview-close" type="button" aria-label="Close preview" autofocus>×</button>
   <div class="preview-content"></div>
 </dialog>
 {directory.map((company) => <template data-company-preview={company.id}>
@@ -13,8 +14,8 @@ const asset = (path: string) => `${import.meta.env.BASE_URL.replace(/\/$/, '')}/
     <p class="preview-discipline">{company.discipline}</p>
     <h2 id="company-preview-title">{company.name}</h2>
     <p>{company.description}</p>
-    <ul aria-label="Company services">{services.filter((service) => service.companyId === company.id).map((service) => <li>{service.title}</li>)}</ul>
-    <a class="preview-enquiry" href={`mailto:beamco@beamcointl.com?subject=${encodeURIComponent(`Enquiry: ${company.name}`)}`}>{company.enquiry}<span aria-hidden="true">↗</span></a>
+    <ul aria-label="Services">{services.filter((service) => service.companyId === company.id).map((service) => <li>{service.title}</li>)}</ul>
+    <a class="preview-enquiry" href={`mailto:beamco@beamcointl.com?subject=${encodeURIComponent(`Enquiry: ${company.name}`)}`}>{company.enquiry}<LinkArrow /></a>
   </div>
 </template>)}
 <script>
