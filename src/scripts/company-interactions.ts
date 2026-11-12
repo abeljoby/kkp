@@ -1,52 +1,117 @@
 const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 const hoverAvailable = window.matchMedia('(hover: hover) and (pointer: fine)');
 const cards = [...document.querySelectorAll<HTMLElement>('.interactive-company')];
-const states = new Map<HTMLElement, { pinned: boolean; hovered: boolean; suppressFocus: boolean }>();
+const states = new Map<HTMLElement, {
+  pinned: boolean; hovered: boolean; suppressFocus: boolean;
+  hoverTimer?: ReturnType<typeof setTimeout>;
+}>();
+let companyNavigation: AbortController | undefined;
 
-function setExpanded(card: HTMLElement, expanded: boolean) {
-  card.classList.toggle('is-expanded', expanded);
-  if (card instanceof HTMLDetailsElement) card.open = expanded;
-  else {
-    const reveal = card.querySelector<HTMLElement>('.company-reveal');
-    if (reveal) reveal.hidden = !expanded;
-    card.querySelector('[data-company-toggle]')?.setAttribute('aria-expanded', String(expanded));
-  }
+function cancelCompanyNavigation() {
+  companyNavigation?.abort();
+  companyNavigation = undefined;
 }
 
-function pinCompany(card: HTMLElement, focus = true) {
+function waitForCompanyArrival(signal: AbortSignal): Promise<boolean> {
+  return new Promise((resolve) => {
+    let frame: number;
+    let lastX = window.scrollX;
+    let lastY = window.scrollY;
+    let lastMovement = performance.now();
+    const finish = (arrived: boolean) => {
+      cancelAnimationFrame(frame);
+      signal.removeEventListener('abort', onAbort);
+      resolve(arrived);
+    };
+    const onAbort = () => finish(false);
+    const check = (now: number) => {
+      if (window.scrollX !== lastX || window.scrollY !== lastY) {
+        lastX = window.scrollX;
+        lastY = window.scrollY;
+        lastMovement = now;
+      }
+      // Allow scrolling to settle for 120ms, then pause for 60ms before revealing.
+      if (now - lastMovement >= 180) finish(true);
+      else frame = requestAnimationFrame(check);
+    };
+    signal.addEventListener('abort', onAbort, { once: true });
+    frame = requestAnimationFrame(check);
+  });
+}
+
+function setExpanded(card: HTMLElement, expanded: boolean): Promise<void> {
+  card.classList.toggle('is-expanded', expanded);
+  const reveal = card.querySelector<HTMLElement>('.company-reveal');
+  if (reveal) {
+    reveal.inert = !expanded;
+    reveal.setAttribute('aria-hidden', String(!expanded));
+  }
+  card.querySelector('[data-company-toggle]')?.setAttribute('aria-expanded', String(expanded));
+  return Promise.resolve();
+}
+
+function pinCompany(card: HTMLElement, focus = true): Promise<void> {
+  cancelCompanyNavigation();
   const shell = card.closest('.site-shell');
+  const changes: Promise<void>[] = [];
   cards.forEach((other) => {
     if (other !== card && other.closest('.site-shell') === shell) {
-      states.get(other)!.pinned = false;
-      setExpanded(other, false);
+      const state = states.get(other)!;
+      clearTimeout(state.hoverTimer);
+      state.pinned = false;
+      changes.push(setExpanded(other, false));
     }
   });
-  states.get(card)!.pinned = true;
-  setExpanded(card, true);
+  const state = states.get(card)!;
+  clearTimeout(state.hoverTimer);
+  state.pinned = true;
+  changes.push(setExpanded(card, true));
   if (focus) card.querySelector<HTMLElement>('[data-company-toggle]')?.focus({ preventScroll: true });
+  return Promise.all(changes).then(() => {});
 }
 
 cards.forEach((card) => {
-  const state = { pinned: card instanceof HTMLDetailsElement && card.open, hovered: false, suppressFocus: false };
+  const state: NonNullable<ReturnType<typeof states.get>> = { pinned: card instanceof HTMLDetailsElement && card.open, hovered: false, suppressFocus: false };
+  // Measure the hidden portion once per layout change, never on hover.
+  const reveal = card.querySelector<HTMLElement>('.company-reveal')!;
+  const panel = card.querySelector<HTMLElement>('.company-panel')!;
+  const measure = () => {
+    if (!card.getClientRects().length) return;
+    card.style.setProperty('--company-reveal-height', `${reveal.getBoundingClientRect().height}px`);
+    card.style.setProperty('--company-panel-height', `${panel.offsetHeight + 48}px`);
+  };
+  measure();
+  new ResizeObserver(measure).observe(panel);
+  card.classList.add('lift-ready');
+  setExpanded(card, state.pinned);
   states.set(card, state);
   const toggle = card.querySelector<HTMLElement>('[data-company-toggle]');
   card.addEventListener('pointerenter', () => {
     if (!hoverAvailable.matches) return;
     state.hovered = true;
-    setExpanded(card, true);
+    if (companyNavigation) return;
+    clearTimeout(state.hoverTimer);
+    state.hoverTimer = setTimeout(() => setExpanded(card, true), 60);
   });
   card.addEventListener('pointerleave', () => {
     state.hovered = false;
-    if (!state.pinned && !card.contains(document.activeElement)) setExpanded(card, false);
+    clearTimeout(state.hoverTimer);
+    if (companyNavigation) return;
+    state.hoverTimer = setTimeout(() => {
+      if (!state.pinned && !card.contains(document.activeElement)) setExpanded(card, false);
+    }, 160);
   });
   card.addEventListener('focusin', () => {
-    if (!state.suppressFocus) setExpanded(card, true);
+    clearTimeout(state.hoverTimer);
+    if (!state.suppressFocus && !companyNavigation) setExpanded(card, true);
   });
   card.addEventListener('focusout', (event) => {
     if (!card.contains(event.relatedTarget as Node | null) && !state.pinned && !state.hovered) setExpanded(card, false);
   });
   toggle?.addEventListener('click', (event) => {
     event.preventDefault();
+    cancelCompanyNavigation();
+    clearTimeout(state.hoverTimer);
     if (state.pinned) {
       state.pinned = false;
       setExpanded(card, false);
@@ -54,6 +119,8 @@ cards.forEach((card) => {
   });
   card.addEventListener('keydown', (event) => {
     if (event.key !== 'Escape') return;
+    cancelCompanyNavigation();
+    clearTimeout(state.hoverTimer);
     state.pinned = false;
     state.suppressFocus = true;
     toggle?.focus({ preventScroll: true });
@@ -70,10 +137,29 @@ document.addEventListener('click', (event) => {
   const target = document.getElementById(link.hash.slice(1));
   if (!target?.matches('.interactive-company')) return;
   event.preventDefault();
-  pinCompany(target);
+  cancelCompanyNavigation();
+  const navigation = new AbortController();
+  companyNavigation = navigation;
+  const { signal } = navigation;
+  cards.forEach((card) => {
+    clearTimeout(states.get(card)!.hoverTimer);
+    if (card.closest('.site-shell') === target.closest('.site-shell')) {
+      states.get(card)!.pinned = false;
+      setExpanded(card, false);
+    }
+  });
+  // New input cancels the pending reveal instead of opening a card later unexpectedly.
+  document.addEventListener('pointerdown', cancelCompanyNavigation, { capture: true, signal });
+  document.addEventListener('keydown', cancelCompanyNavigation, { capture: true, signal });
+  document.addEventListener('wheel', cancelCompanyNavigation, { passive: true, signal });
+  document.addEventListener('touchstart', cancelCompanyNavigation, { passive: true, signal });
   history.replaceState(null, '', link.hash);
-  // Wait until the newly expanded card has its final height before scrolling.
-  requestAnimationFrame(() => target.scrollIntoView({ behavior: reducedMotion.matches ? 'instant' : 'smooth', block: 'center' }));
+  target.scrollIntoView({ behavior: reducedMotion.matches ? 'instant' : 'smooth', block: 'center' });
+  void waitForCompanyArrival(signal).then((arrived) => {
+    if (!arrived || companyNavigation !== navigation) return;
+    cancelCompanyNavigation();
+    if (target.getClientRects().length) pinCompany(target);
+  });
 });
 
 function openHashCompany() {

@@ -6,7 +6,7 @@ import { directory } from "../data/homepage";
 import ServiceStrip from "./ServiceStrip.astro";
 import ServiceHeading from "./ServiceHeading.astro";
 import HeroSlideshow from "./HeroSlideshow.astro";
-import CompanyReveal from "./CompanyReveal.astro";
+import CompanyCard from "./CompanyCard.astro";
 const asset = (path: string) => `${import.meta.env.BASE_URL}/${path.replace(/^\//, '')}`;
 ---
   <div class="site-shell previous-shell" data-design="signature">
@@ -32,12 +32,7 @@ const asset = (path: string) => `${import.meta.env.BASE_URL}/${path.replace(/^\/
 
       <section class="companies-section section" id="previous-companies"><div class="wrap">
         <div class="section-heading"><h2>Our expertise <br /><span>and services.</span></h2><p>We bring together MEP contracting, construction, joinery, interior fit-out, facilities management and business-centre services.</p></div>
-        <div class="company-grid">{directory.map((company) => <article class="company-card interactive-company" id={`previous-company-${company.id}`} data-company-id={company.id}>
-          <div class="company-image"><img class="company-cover" src={asset(company.image)} alt="" width="1920" height="552" loading="lazy" /></div>
-          <span class="company-number">{company.number}</span><div class="company-info"><h3>{company.name}</h3><p>{company.type}</p></div><LinkArrow class="company-arrow" />
-        <button class="company-toggle" type="button" data-company-toggle aria-expanded="false" aria-controls={`previous-reveal-${company.id}`} aria-label={`Explore ${company.name}`}></button>
-          <CompanyReveal company={company} id={`previous-reveal-${company.id}`} />
-        </article>)}</div>
+        <div class="company-grid">{directory.map((company) => <CompanyCard company={company} prefix="previous-company-" />)}</div>
 
       </div></section>
 

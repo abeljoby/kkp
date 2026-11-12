@@ -1,0 +1,16 @@
+---
+import CompanyReveal from './CompanyReveal.astro';
+import type { directory } from '../data/homepage';
+interface Props { company: (typeof directory)[number]; prefix?: string; directoryEntry?: boolean }
+const { company, prefix = '', directoryEntry = false } = Astro.props;
+const id = `${prefix}${company.id}`;
+const asset = (path: string) => `${import.meta.env.BASE_URL}/${path.replace(/^\//, '')}`;
+---
+<article class:list={['company-card', 'interactive-company', { 'directory-entry': directoryEntry }]} id={id} data-company-id={company.id} data-lift-card aria-labelledby={`${id}-title`}>
+  <img class="company-media" src={asset(company.image)} alt="" width="1920" height="552" loading="lazy" />
+  <button class="company-toggle" type="button" data-company-toggle aria-expanded="false" aria-controls={`${id}-reveal`} aria-label={`Explore ${company.name}`}></button>
+  <div class="company-panel">
+    <div class="company-panel-heading"><h3 id={`${id}-title`}>{company.name}</h3><p>{company.discipline}</p></div>
+    <CompanyReveal company={company} id={`${id}-reveal`} />
+  </div>
+</article>

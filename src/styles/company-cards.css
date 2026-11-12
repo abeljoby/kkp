@@ -1,0 +1,60 @@
+/* The frame stays in flow; only the panel and photograph move. */
+.site-shell { --company-card-height: 420px; --company-panel-bg: #fff; --company-panel-ink: var(--ink); --company-panel-muted: var(--muted); --company-media-width: 100%; --company-panel-left: 0px; }
+.previous-shell[data-design='signature'] { --company-panel-bg: #0a2349f2; --company-panel-ink: #fff; --company-panel-muted: #dbe1eb; }
+.previous-shell[data-design='precision'], .new-shell:not([data-design='corporate']) { --company-card-height: 300px; --company-media-width: 38%; --company-panel-left: 38%; }
+.new-shell[data-design='precision'] { --company-panel-bg: #101d33; --company-panel-ink: #fff; --company-panel-muted: #c4cede; }
+
+.site-shell[data-design] .company-card.interactive-company[data-lift-card] {
+  position: relative;
+  display: block;
+  min-height: var(--company-card-height);
+  padding: 0;
+  margin: 0;
+  border: 1px solid var(--line);
+  background: var(--company-panel-bg);
+  color: var(--company-panel-ink);
+  overflow: hidden;
+  isolation: isolate;
+  align-self: start;
+  scroll-margin-block: 35px;
+  overflow-anchor: none;
+  transform: none;
+  transition: border-color .3s, box-shadow .3s;
+
+  &::after { display: none; }
+  &.lift-ready { height: max(var(--company-card-height), var(--company-panel-height, 0px)); min-height: 0; }
+  &:hover, &.is-expanded { transform: none; box-shadow: 0 8px 24px #0a234914; border-color: var(--gold, #d9b55c); }
+  .company-media { position: absolute; inset: 0 auto 0 0; width: var(--company-media-width); height: 100%; object-fit: cover; transition: transform .5s ease; }
+  &.is-expanded .company-media { transform: scale(1.025); }
+  .company-toggle { display: none; }
+  &.lift-ready .company-toggle { display: block; position: absolute; inset: 0; z-index: 3; width: 100%; height: 100%; border: 0; background: transparent; cursor: pointer; color: inherit; }
+  .company-toggle:focus-visible { outline: 3px solid var(--gold, #d9b55c); outline-offset: -4px; }
+  .company-panel { position: relative; z-index: 4; margin: 160px 0 0; padding: 24px; background: var(--company-panel-bg); pointer-events: none; }
+  &.lift-ready .company-panel { position: absolute; inset: auto 0 0 var(--company-panel-left); margin: 0; transform: translateY(var(--company-reveal-height, 0px)); transition: transform .4s cubic-bezier(.22,1,.36,1); }
+  &.lift-ready.is-expanded .company-panel { transform: translateY(0); }
+  .company-panel-heading { position: relative; }
+  .company-panel-heading h3 { margin: 0; max-width: none; color: inherit; font-size: clamp(21px, 1.7vw, 26px); line-height: 1.2; font-weight: 550; letter-spacing: -.03em; }
+  .company-panel-heading > p { margin: 10px 0 0; color: var(--company-panel-muted); font-size: 13px; line-height: 1.5; }
+  .company-reveal { position: relative; margin: 0; padding: 18px 0 0; border: 0; max-width: none; color: inherit; }
+  .company-reveal > p { margin: 0; color: var(--company-panel-muted); font: 400 15px/1.65 'Inter',Arial,sans-serif; letter-spacing: 0; }
+  &.lift-ready .company-reveal { opacity: 0; visibility: hidden; transition: opacity .25s, visibility 0s .4s; }
+  &.lift-ready.is-expanded .company-reveal { opacity: 1; visibility: visible; transition: opacity .3s .08s, visibility 0s; }
+  .company-view { position: relative; z-index: 5; pointer-events: auto; color: inherit; }
+}
+.legacy-shell .hybrid-shell[data-design='modern'] .company-card[data-lift-card] {
+  .company-panel-heading h3 { font: 600 29px/1.1 var(--display); }
+  .company-panel-heading > p, .company-reveal > p, .company-view { font-family: var(--body); font-size: 17px; }
+}
+.new-shell .company-directory { display: grid; gap: 22px; align-items: start; }
+.new-shell[data-design='corporate'] .company-directory { gap: 22px; }
+.previous-shell[data-design='precision'] .company-grid { display: grid; grid-template-columns: 1fr; gap: 20px; border: 0; }
+.previous-shell[data-design='precision'] .company-card[data-lift-card] { grid-column: 1 / -1; }
+@media (max-width: 767px) {
+  .site-shell { --company-card-height: 420px; --company-media-width: 100%; --company-panel-left: 0px; }
+  .previous-shell[data-design='precision'], .new-shell:not([data-design='corporate']) { --company-card-height: 420px; --company-media-width: 100%; --company-panel-left: 0px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .site-shell[data-design] .company-card.interactive-company[data-lift-card] {
+    &, .company-panel, .company-media, .company-reveal { transition: none !important; }
+  }
+}

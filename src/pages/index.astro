@@ -5,6 +5,7 @@ import ServiceStrip from '../components/ServiceStrip.astro';
 import ServiceHeading from '../components/ServiceHeading.astro';
 import HeroSlideshow from '../components/HeroSlideshow.astro';
 import CompanyPreview from '../components/CompanyPreview.astro';
+import CompanyCard from '../components/CompanyCard.astro';
 import LegacyHome from '../components/LegacyHome.astro';
 import OriginalHome from '../components/OriginalHome.astro';
 import { directory, needs } from '../data/homepage';
@@ -70,10 +71,7 @@ const designGroups = [
 
       <section class="directory-section section" id="companies" aria-labelledby="directory-title"><div class="wrap directory-layout">
         <div class="directory-intro"><h2 id="directory-title">Get to know <br />your specialist.</h2><p>From engineering and construction to interiors, property care and workspace, explore the expertise for your next project.</p><a class="text-link" href="#contact">Not sure where to start? <LinkArrow /></a></div>
-        <div class="company-directory">{directory.map((company) => <details class="directory-entry interactive-company" id={company.id} data-company-id={company.id}>
-          <summary data-company-toggle><span class="directory-number">{company.number}</span><div><h3>{company.name}</h3><span class="directory-discipline">{company.discipline}</span></div><span class="detail-symbol" aria-hidden="true"></span></summary>
-          <div class="directory-body"><img src={asset(company.image)} alt="" width="1920" height="552" loading="lazy" /><div><p>{company.description}</p><button class="company-view" type="button" data-view-company={company.id}>Explore services <LinkArrow /></button></div></div>
-        </details>)}</div>
+        <div class="company-directory">{directory.map((company) => <CompanyCard company={company} directoryEntry />)}</div>
       </div></section>
 
       <section class="group-note" id="group" aria-labelledby="group-title"><div class="wrap group-note-grid">
@@ -168,7 +166,7 @@ const designGroups = [
     }));
     const revealTarget = (hash: string) => {
       const target = document.getElementById(hash.slice(1));
-      if (target instanceof HTMLDetailsElement) {
+      if (target instanceof HTMLDetailsElement && !target.matches('.interactive-company')) {
         target.open = true;
         if (target.classList.contains('need-detail')) showNeed(target.id);
       }

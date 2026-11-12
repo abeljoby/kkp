@@ -64,30 +64,9 @@
 .legacy-shell .hybrid-hero-slideshow { position: absolute; inset: 0; z-index: -2; }
 .previous-shell[data-design='corporate'] .hero { border-bottom: 0; }
 
-/* Cards keep their existing image/layout treatment and grow to reveal the profile. */
-.site-shell .interactive-company { position: relative; scroll-margin-block: 35px; }
-.site-shell .interactive-company > .company-toggle { position: absolute; z-index: 2; inset: 0; width: 100%; height: 100%; background: transparent; border: 0; border-radius: 0; cursor: pointer; }
-.site-shell .interactive-company > .company-toggle:focus-visible { outline: 3px solid var(--gold, var(--accent, #d6a94c)); outline-offset: -4px; }
-.site-shell .interactive-company > .company-reveal { position: relative; z-index: 3; padding-top: 20px; border-top: 1px solid currentColor; margin-top: 20px; }
-.site-shell .company-reveal > p { font: 400 15px/1.65 'Inter',Arial,sans-serif; letter-spacing: 0; color: inherit; margin: 0; }
-.site-shell .company-view { position: relative; z-index: 3; display: inline-flex; align-items: center; justify-content: space-between; gap: 24px; margin-top: 19px; padding: 11px 0; background: transparent; color: inherit; border: 0; border-bottom: 1px solid currentColor; border-radius: 0; text-decoration: none; font: 600 14px/1.4 'Inter',Arial,sans-serif; cursor: pointer; }
+/* Shared company controls; fixed-frame presentation lives in company-cards.css. */
+.site-shell .company-view { display: inline-flex; align-items: center; gap: 24px; margin-top: 16px; padding: 10px 0; background: transparent; color: inherit; border: 0; border-bottom: 1px solid currentColor; border-radius: 0; text-decoration: none; font: 600 14px/1.4 'Inter',Arial,sans-serif; cursor: pointer; }
 .site-shell .company-view:hover { opacity: .75; }
-.site-shell .interactive-company.is-expanded { box-shadow: inset 0 -3px var(--gold, var(--accent, #d6a94c)); }
-.previous-shell[data-design='signature'] .company-card.is-expanded { min-height: 460px; }
-.previous-shell[data-design='signature'] .company-card.is-expanded::after { background: linear-gradient(180deg,#081a3140,#081a31f5 60%); }
-.previous-shell[data-design='signature'] .company-reveal { border-color: #ffffff50; }
-.previous-shell[data-design='signature'] .company-view { color: var(--gold); }
-.previous-shell[data-design='corporate'] .company-reveal { grid-column: 1 / -1; margin-inline: 35px 24px; border-color: var(--line); }
-.previous-shell[data-design='corporate'] .company-view, .previous-shell[data-design='precision'] .company-view { color: var(--blue); }
-.previous-shell[data-design='precision'] .company-reveal { grid-column: 2 / -1; grid-row: 2; margin: 0; padding: 20px 30px 0 0; border-color: var(--line); max-width: 750px; }
-.previous-shell[data-design='precision'] .company-card.is-expanded { background: var(--paper); }
-.legacy-shell .hybrid-shell[data-design='modern'] .company-reveal { padding: 0 23px 25px; margin: 0; border: 0; background: #fff; }
-.legacy-shell .hybrid-shell[data-design='modern'] .company-reveal > p { font: 400 17px/1.65 var(--body); color: #506071; }
-.legacy-shell .hybrid-shell[data-design='modern'] .company-view { font-family: var(--body); font-size: 16px; color: var(--dark); }
-.new-shell .directory-entry.is-expanded { background: var(--paper); }
-.new-shell .directory-entry .company-view { color: var(--blue); }
-.new-shell .directory-body { position: relative; z-index: 3; }
-.new-shell .company-directory { align-items: start; }
 
 /* One accessible preview stands in for future dedicated company routes. */
 .company-preview { --preview-ink: #17273e; --preview-blue: #123d8d; --preview-gold: #d9b55c; --preview-bg: #fff; width: min(700px, calc(100vw - 32px)); max-height: calc(100dvh - 40px); padding: 0; border: 0; background: var(--preview-bg); color: var(--preview-ink); font-family: 'Inter',Arial,sans-serif; overflow-y: auto; overscroll-behavior: contain; margin: auto; }
@@ -114,8 +93,6 @@ body:has(.company-preview[open]) { overflow: hidden; }
 }
 @media (max-width: 640px) {
   .site-shell .service-heading-box { left: 16px; padding: 14px 18px; }
-  .previous-shell[data-design='precision'] .company-reveal { grid-column: 2 / -1; grid-row: 3; padding-right: 10px; }
-  .previous-shell[data-design='corporate'] .company-reveal { margin-inline: 12px; }
   .company-preview .preview-copy { padding: 25px; }
   .company-preview h2 { font-size: 28px; }
   .company-preview .preview-image { height: 170px; }

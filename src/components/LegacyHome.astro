@@ -5,7 +5,7 @@ import { directory } from "../data/homepage";
 import ServiceStrip from "./ServiceStrip.astro";
 import ServiceHeading from "./ServiceHeading.astro";
 import HeroSlideshow from "./HeroSlideshow.astro";
-import CompanyReveal from "./CompanyReveal.astro";
+import CompanyCard from "./CompanyCard.astro";
 const asset = (path: string) => `${import.meta.env.BASE_URL}/${path.replace(/^\//, '')}`;
 ---
 <div class="legacy-shell" hidden>
@@ -42,7 +42,7 @@ const asset = (path: string) => `${import.meta.env.BASE_URL}/${path.replace(/^\/
 				<div class="wrap">
 					<div class="section-heading"><div><h2>Our expertise<br />and services.</h2></div><p class="section-intro">We bring together MEP contracting, construction, joinery, interior fit-out, facilities management and business-centre services.</p></div>
 					<div class="company-grid">
-						{directory.map((company) => <article class="company-card interactive-company" id={`legacy-company-${company.id}`} data-company-id={company.id}><div class="hybrid-company-image"><img class="company-cover" src={asset(company.image)} alt="" width="1920" height="552" loading="lazy" /><span class="company-number">{company.number}</span></div><div class="hybrid-company-copy"><span class="company-name">{company.name}</span><span class="company-type">{company.type}</span><LinkArrow class="company-arrow" /></div><button class="company-toggle" type="button" data-company-toggle aria-expanded="false" aria-controls={`legacy-reveal-${company.id}`} aria-label={`Explore ${company.name}`}></button><CompanyReveal company={company} id={`legacy-reveal-${company.id}`} /></article>)}
+						{directory.map((company) => <CompanyCard company={company} prefix="legacy-company-" />)}
 					</div>
 
 				</div>
