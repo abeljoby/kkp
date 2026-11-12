@@ -2,9 +2,8 @@
 interface Props { class: string; imageClass?: string; first?: number }
 const { class: className, imageClass = 'hero-photo', first = 0 } = Astro.props;
 const scenes = [
-  { image: 'hbanner03.jpg', alt: 'Commercial building from the Beamco property archive' },
-  { image: 'hbanner01.jpg', alt: 'Building services across a Dubai rooftop, with the city skyline beyond' },
-  { image: 'hbanner04.jpg', alt: 'Detailed exterior of a residential property from the Beamco archive' },
+  { image: 'hbanner01.jpg', alt: 'Rooftop building services with a city skyline beyond' },
+  { image: 'hbanner04.jpg', alt: 'Detailed exterior of a residential property' },
 ];
 const ordered = [...scenes.slice(first), ...scenes.slice(0, first)];
 const asset = (name: string) => `${import.meta.env.BASE_URL.replace(/\/$/, '')}/images/beamco/webimg/${name}`;
